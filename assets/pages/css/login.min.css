@@ -1,0 +1,257 @@
+@font-face {
+    font-family: Varela;
+    src: url(../fonts/Varela-Regular.ttf);
+}
+
+@font-face {
+    font-family: VarelaRound;
+    src: url(../fonts/VarelaRound-Regular.ttf);
+}
+
+.login .user-login-5 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container-login {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+.wrap-login {
+    width: 1170px;
+    background: #fff;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 50px 0px;
+}
+
+#login-form {
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 3% 0%;
+}
+
+.login-form-content {
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 0 20px;
+}
+.login-submit-btn:hover{
+    color: #fff;
+}
+
+#login-form .logo {
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 110px;
+}
+
+.login .wrap-login #login-form .login-title {
+    color: #68676d;
+    font-size: 20px;
+    line-height: 46px;
+    font-family: 'VarelaRound' !important;
+}
+
+#login-form .form-group {
+    margin-bottom: 15px;
+}
+
+#login-form .login-fields {
+    border: none;
+    padding: 20px 0px;
+    font-size: 16px;
+    border-bottom: 1px solid #d2d6de !important;
+    font-family: 'VarelaRound' !important;
+}
+
+#login-form .form-actions {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#login-form .rememberme {
+    font-size: 14px;
+    color: #d1ced5;
+    line-height: 1.1;
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+    font-family: 'VarelaRound' !important;
+}
+
+#login-form .form-actions span {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d1ced5;
+    border-radius: 3px;
+}
+
+#login-form .form-actions span:after {
+    /* background: #06aef7; */
+    /* top: 0; */
+    /* width: 8px; */
+    /* height: 8px; */
+    /* transition: all .3s; */
+    border: 1px solid #06aef7;
+    /* border-radius: 2px; */
+    transform: rotate(45deg);
+    left: 5px !important;
+    color: #fff !important;
+    fill: #ccc !important;
+    border-width: 0 3px 3px 0;
+}
+
+#login-form .form-actions .forget-password {
+    font-size: 14px;
+    color: #d1ced5;
+    line-height: 1.1;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-family: 'VarelaRound' !important;
+    width: 100%;
+    text-align: right;
+}
+
+.submit-btn {
+    text-align: center;
+    margin: 10% auto;
+}
+
+.login-submit-btn {
+    background-color: #06aef7 !important;
+    border-color: #06aef7 !important;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 100px !important;
+    color: #ffffff;
+    font-size: 14px !important;
+    text-transform: capitalize !important;
+    width: 150px;
+    height: 50px;
+    font-family: 'VarelaRound' !important;
+}
+
+.create-account {
+    font-size: 15px;
+    color: #d1ced5;
+    line-height: 1.5;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'VarelaRound' !important;
+}
+
+.create-account .sign-up {
+    color: #06aef7;
+    margin-left: 10px;
+}
+
+
+
+.welcome-content {
+    text-align: center;
+    color: #ffffff;
+    max-width: 450px;
+    margin: 10% auto;
+}
+
+.white-logo {
+
+    margin: 30px auto;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    height: 200px;
+}
+
+.welcome-title h2 {
+    font-family: 'VarelaRound' !important;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+.welcome-description p {
+    font-size: 16px;
+    line-height: 26px;
+}
+
+@media (max-width: 1366px) {
+    .wrap-login {
+        padding: 20px 0px;
+    }
+    #login-form {
+        padding: 2% 0%;
+    }
+    .welcome-content {
+        margin: 5% auto;
+    }
+    .submit-btn {
+        margin: 3% auto;
+    }
+}
+
+@media (max-width: 767px) {
+    #login-form {
+        width: 100%;
+    }
+    .login-image-more {
+        width: 100%;
+    }
+    .login-form-content {
+        max-width: 300px;
+    }
+    #login-form .rememberme {
+        font-size: 12px;
+        padding-left: 20px;
+    }
+    #login-form .form-actions span {
+        width: 14px;
+        height: 14px;
+    }
+    #login-form .form-actions .forget-password {
+        font-size: 12px;
+        padding-left: 35%;
+    }
+    .welcome-title h2 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .welcome-description p {
+        font-size: 14px;
+        line-height: 22px;
+        padding: 0px 15px;
+    }
+}

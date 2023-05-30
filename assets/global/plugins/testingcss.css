@@ -1,0 +1,1188 @@
+
+img {
+    max -width: 100%
+}
+
+.Sd_sizechartmodel.inlineversion ul.sd_maintabs {
+    padding: 0 0 5px !important
+}
+
+.pmodal {
+    display: none;
+    position: fixed;
+    z -index: 1;
+    padding -top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background -color: #000;
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.close {
+    color: # aaa;
+    float: right;
+    font -size: 28px;
+    font -weight: bold
+}
+
+.close: hover, .close: focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.sd_sizetablefront tr:nth-child(even) {
+    background: # f5f5f6
+}
+
+.sd_sizetablefront tr: nth
+
+-
+child
+(
+odd
+
+)
+{
+    background: #fff
+}
+.sd_sizetablefront tr: hover {
+    background -color: #eaeaec
+}
+
+.sd_sizetablefront tr: nth
+
+-
+child
+(
+1
+)
+: hover {
+    background -color: #fff
+}
+
+.sd_pop_producttitle {
+    font -family: 'Roboto', sans -serif
+}
+
+.sd_pop_options {
+    font -family: 'Roboto', sans -serif
+}
+
+.sd_pop_below {
+    font -family: 'Roboto', sans -serif
+}
+
+.sd_sizetablefront th {
+    font -family: 'Roboto', sans -serif
+}
+
+.sd_sizetablefront td {
+    font -family: 'Roboto', sans -serif;
+    font -size: 14px;
+    padding: 12px 5px !important
+}
+
+.sd_activefilter {
+    filter: blur(2.5px) grayscale(0);
+    -webkit -filter: blur(2.5px) grayscale(0);
+    -moz -filter: blur(2.5px) grayscale(0);
+    -ms -filter: blur(2.5px) grayscale(0)
+}
+
+.sd_sizelink: before {
+    content: "" !important;
+    background: url(https: //shinedezign.tk/sizechart/images/size_icon_2x.png);
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink {
+    font-family: inherit
+}
+
+.main-chart-table .bx-wrapper {
+    margin: 0 auto
+}
+
+.main-chart-table .bx-viewport {
+    height: 500px
+}
+
+.sd_size-chart-items {
+    position: absolute;
+    white-space: normal;
+    z-index: 9999999;
+    width: 50%;
+    right: -100%;
+    background: #fff;
+    height: 100%;
+    border-left: 1px solid #faf3ed;
+    transition: all 1.3s ease 0s;
+    padding: 12px 20px
+}
+
+.sd_size-chart-left {
+    width: 50%;
+    z-index: 999999999
+}
+
+.sd_size-chart {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0%;
+    height: 100%;
+    z-index: 2147483647;
+    transition: all 1.3s ease 0s;
+    background: rgba(0, 0, 0, .5);
+    display: none
+}
+
+.sd_sizetablefront th {
+    font-weight: bold
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .sd_pinnerpanel .main-chart-table {
+        min-height: 175px !important;
+        max-height: 175px !important
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    ul.sd_maintabs li {
+        width: auto;
+        line-height: 39px;
+        margin-left: 3px
+    }
+
+    ul.sd_maintabs {
+        width: 88%
+    }
+}
+
+@media (max-width: 767px) {
+    .size-box-info {
+        margin: 0 auto;
+        overflow-x: scroll;
+        padding: 15px 0;
+        white-space: nowrap;
+        position: relative;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-top: 0
+    }
+
+    .sd_Sizechart .size-box-info {
+        width: 95%
+    }
+
+    .sd_fixsizehover .size-box-info {
+        width: 95%
+    }
+
+    ul.sd_maintabs {
+        margin: 5px auto 10px !important;
+        white-space: normal;
+        text-align: center;
+        padding: 0 0 5px !important
+    }
+
+    .Sd_popfirst_panel::after {
+        position: absolute;
+        background: url(https://shinedezign.tk/sizechart/images/Scrool-right.png);
+        content: "";
+        padding-top: 0;
+        width: 20px;
+        height: 20px;
+        right: 4px;
+        margin-top: 4px;
+        z-index: 999999999;
+        float: right;
+        -webkit-animation: bounce 2s infinite;
+        animation: bounce 2s infinite;
+        bottom: -20px;
+        background-size: 20px 20px;
+        background-repeat: no-repeat
+    }
+
+    .Sd_popfirst_panel.noactive::after {
+        visibility: hidden !important
+    }
+
+    .size-box-info.addleftborder::before {
+        position: absolute;
+        background: url(https://shinedezign.tk/sizechart/images/Scrool-down.png);
+        content: "";
+        padding-top: 0;
+        width: 20px;
+        height: 20px;
+        left: -4px;
+        margin-top: 4px;
+        z-index: 999999999;
+        float: left;
+        -webkit-animation: bounce2 2s infinite;
+        animation: bounce2 2s infinite;
+        top: 144px;
+        background-size: 20px 20px;
+        background-repeat: no-repeat
+    }
+
+    .sd_table-shadow-right {
+    }
+
+    .sizechartslider {
+        margin: 0
+    }
+
+    .Sd_popfirst_panel {
+        width: 100%;
+        margin: 0 auto
+    }
+
+    .Sd_popfirst_panel button.pclose {
+        right: 1px !important
+    }
+
+    .sd_belowimage_panel img {
+        width: 100% !important
+    }
+
+    .sd_size_innerpop {
+        margin-top: 50px !important;
+        width: 92% !important;
+        height: auto !important;
+        padding-bottom: 30px
+    }
+
+    .main-chart-table {
+        min-height: 285px !important;
+        padding-top: 5px !important;
+        overflow-x: auto !important;
+        overflow-y: scroll !important;
+        white-space: nowrap;
+        z-index: 999999;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 18px !important
+    }
+
+    .sd_sizetablefront td {
+        font-family: 'Roboto', sans-serif;
+        font-size: 11px
+    }
+
+    .sd_sizetablefront th {
+        font-size: 13px
+    }
+
+    .sd_pop_producttitle {
+        margin-top: 0 !important
+    }
+
+    .Sd_sizechartmodel .bx-pager {
+        display: none
+    }
+
+    .sd_pop_below {
+        width: 85%;
+        margin: 0 auto;
+        white-space: normal
+    }
+
+    .sd_size-chart-items {
+        width: 85% !important
+    }
+
+    .sd_pop_producttitle {
+        width: 80%;
+        font-size: 13px !important
+    }
+
+    p.sd_pop_options {
+        font-size: 12px !important
+    }
+
+    .sd_pop_below {
+        font-size: 12px !important
+    }
+
+    .sd_sizetablefront th {
+        font-size: 13px !important
+    }
+
+    .sd_sizetablefront td {
+        font-size: 12px !important
+    }
+
+    .sd_Sizechart .Sd_sizechartmodel table {
+        width: 100% !important
+    }
+
+    .sd_sizetablefront {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch
+    }
+
+    .Sd_sizechartmodel table {
+        table-layout: inherit !important
+    }
+
+    .Sd_sizechartmodel2 table {
+        table-layout: inherit !important
+    }
+
+    .Sd_sizechartmodel2 .main-chart-table {
+        padding-left: 0 !important;
+        padding-right: 0 !important
+    }
+
+    .sd_sizelink::before {
+        content: "" !important;
+        background: url(https://shinedezign.tk/sizechart/images/size_icon_2x.png);
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: 12px 12px
+    }
+
+    .sd_intpinnerpanel.sd_size_intinnerpop {
+        width: 95% !important;
+        height: auto !important
+    }
+
+    .int-main-chart-table {
+        min-height: 285px !important;
+        max-height: 285px !important;
+        padding-top: 5px !important;
+        overflow-x: auto !important;
+        overflow-y: scroll !important;
+        white-space: nowrap;
+        z-index: 999999;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 18px !important;
+        padding: 0 8px;
+        width: 97%
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    p.sd_pop_producttitle {
+        width: 80%
+    }
+
+    .sd_fixsizehover .sd_size-chart-left {
+        width: 28%
+    }
+
+    .sd_fixsizehover .sd_size-chart-items {
+        width: 72%
+    }
+
+    .sd_size_innerpop {
+        width: 730px !important
+    }
+}
+
+ul.sd_maintabs {
+    margin: 15px auto;
+    text-align: center;
+    padding: 0 0 15px;
+    width: 95%
+}
+
+ul.sd_maintabs li {
+    display: inline-block
+}
+
+ul.sd_maintabs li a {
+    background: #fff;
+    padding: 10px;
+    border: 2px solid #000;
+    font-size: 13px;
+    color: #000;
+    opacity: 1;
+    text-transform: uppercase;
+    font-family: arial;
+    font-weight: bold
+}
+
+a.sd_activetab {
+    background: #000 !important;
+    color: #fff !important
+}
+
+.Sd_sizechartmodel table {
+    border: 1px solid #ccc !important;
+    table-layout: fixed
+}
+
+.Sd_sizechartmodel2 table {
+    border: 1px solid #ccc !important;
+    table-layout: fixed
+}
+
+.Sd_sizechartmodel table th {
+    white-space: normal
+}
+
+.Sd_sizechartmodel table td {
+    white-space: normal
+}
+
+.Sd_sizechartmodel2 table th {
+    white-space: normal
+}
+
+.Sd_sizechartmodel2 table td {
+    white-space: normal
+}
+
+.Sd_sizechartmodel2 .sd_pop_below {
+    padding-top: 20px !important
+}
+
+.sd_tabscontainer {
+    display: none
+}
+
+.sd_activetabcontent {
+    display: inline !important
+}
+
+.sd_size_innerpop .pclose img {
+    width: 13px !important;
+    height: 13px !important
+}
+
+.sd_fixclose img {
+    width: 15px !important;
+    height: 15px !important
+}
+
+.sd_fixclose {
+    width: auto !important
+}
+
+.Sd_sizechartmodel ul li {
+    list-style: none
+}
+
+.Sd_sizechartmodel2 ul li {
+    list-style: none
+}
+
+.Sd_sizechartmodel img:hover {
+    opacity: 1
+}
+
+.Sd_sizechartmodel2 img:hover {
+    opacity: 1
+}
+
+@-webkit-keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        -webkit -transform: translatex(0);
+        transform: translatex(0);
+    }
+    40% {
+        -webkit -transform: translatex(-30px);
+        transform: translatex(-30px);
+    }
+    60% {
+        -webkit -transform: translatex(-15px);
+        transform: translatex(-15px);
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        -webkit -transform: translatex(0);
+        transform: translatex(0);
+    }
+    40% {
+        -webkit -transform: translatex(-30px);
+        transform: translatex(-30px);
+    }
+    60% {
+        -webkit -transform: translatex(-15px);
+        transform: translatex(-15px);
+    }
+}
+
+@
+-
+webkit
+
+-
+keyframes bounce2 {
+
+0
+%
+,
+20
+%
+,
+50
+%
+,
+80
+%
+,
+100
+%
+{
+    -webkit -transform: translatey(0)
+;
+    transform: translatey(0)
+;
+}
+40
+%
+{
+    -webkit -transform: translatey(-30px)
+;
+    transform: translatey(-30px)
+;
+}
+60
+%
+{
+    -webkit -transform: translatey(-15px)
+;
+    transform: translatey(-15px)
+;
+}
+}
+@keyframes bounce2 {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        -webkit -transform: translatey(0);
+        transform: translatey(0);
+    }
+    40% {
+        -webkit -transform: translatey(-30px);
+        transform: translatey(-30px);
+    }
+    60% {
+        -webkit -transform: translatey(-15px);
+        transform: translatey(-15px);
+    }
+}
+
+.inlineversion.main
+
+-
+chart
+
+-
+table {
+    min -height: auto !important;
+    max -height: inherit !important;
+    overflow -x: auto !important;
+    overflow -y: auto !important
+}
+
+.sd_sizelink.sd_sizebtn: before {
+    display: none !important
+}
+
+.Sd_sizebuttonpanel {
+    display: block !important
+}
+
+#
+sd_cweight {
+    width: 220px;
+    border: 1px solid # ccc !important;
+    border -radius: 3px;
+    height: 35px;
+    padding: 8px 6px;
+    outline: none;
+    background: #fff;
+    display: block;
+    margin -top: 5px;
+    box -shadow: inset 0 0 2px #999 !important
+}
+
+#
+sd_cheight {
+    width: 235px;
+    border: 1px solid # ccc !important;
+    border -radius: 3px;
+    height: 35px;
+    padding: 8px 6px;
+    outline: none;
+    background: #fff;
+    display: block;
+    margin -top: 5px;
+    box -shadow: inset 0 0 2px #999 !important
+}
+
+.Sd_formcalculator {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: # f7f7f7;
+    padding: 20px;
+    float: left;
+    border: 1px solid # f7f7f7
+}
+
+.sd_innerform {
+    margin -top: 13px;
+    margin -bottom: 10px
+}
+
+.sd_labelfirst {
+    margin -bottom: 5px;
+    width: 50%;
+    display: inline -block;
+    color: #000;
+    font-size: 14px;
+    float: left;
+    font-weight: normal
+}
+
+.sd_labelsecond {
+    margin-bottom: 5px;
+    width: 50%;
+    display: inline-block;
+    color: # 000;
+    font -size: 14px;
+    float: left;
+    font -weight: normal
+}
+
+button# sd_calculatorcheck {
+    background: #272222;
+    color: # fff;
+    border: none;
+    padding: 7px 18px;
+    margin -top: 10px;
+    font -size: 16px;
+    outline: none
+}
+
+.sd_cal_result b.sd_sucess {
+    color: #11b400;
+    font-weight: normal
+}
+
+.sd_cal_result b.sd_notfound {
+    color: # db0c41;
+    font -weight: normal
+}
+
+.sd_cerror {
+    color: #db0c41;
+    font -weight: normal;
+    margin -top: 10px;
+    float: left;
+    width: 100%
+}
+
+.sd_clabel {
+    color: #000;
+    display: inline-block;
+    font-weight: 600;
+    width: 100%;
+    display: inline-block;
+    font-size: 16px
+}
+
+.sd_btn_contain {
+    text-align: center;
+    float: left;
+    width: 100%;
+    margin-top: 15px
+}
+
+.sd_cal_result {
+    float: left;
+    width: 100%;
+    margin-top: 10px
+}
+
+.sd_popup-container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    max-width: 720px;
+    border: 1px solid # f1f1f1
+}
+
+.sd_intersizechart table {
+    margin -bottom: 0 !important
+}
+
+.sd_table_header_tab {
+    margin: 0;
+    padding: 0;
+    background: linear -gradient(to right, #232348, # 4 d7ace, #2a867f)
+}
+
+.shoesfirst {
+    background: linear-gradient(to right, # 7 f7fd5, #86a8e7, # 91 e ae4)
+}
+
+.shoesfirst th {
+    font -size: 12px;
+    text -transform: capitalize;
+    font -family: arial !important;
+    color: #fff;
+    font -weight: bold;
+    text -shadow: 0px 1px 0px #0000002e;
+    letter-spacing: .4px
+}
+
+ul.sd_country-tab-list {
+    margin: 0;
+    padding: 0;
+    color: # fff;
+    text -align: center;
+    text -transform: uppercase;
+    white -space: nowrap;
+    overflow -x: scroll
+}
+
+ul.sd_country
+
+-
+tab
+
+-
+list li {
+    display: inline -block;
+    position: relative;
+    padding: .71428571rem 1.14285714rem 1.14285714rem;
+    line -height: 1.57142857rem;
+    text -align: center;
+    cursor: pointer;
+    vertical -align: top;
+    border -right: 1px solid # ffffff2b;
+    margin -bottom: 0 !important
+}
+
+.flags
+
+-
+icon {
+    display: inline -block;
+    width: 1.64285714rem;
+    height: 1.14285714rem;
+    clear: both;
+    background -image: url(https: //shinedezign.tk/sizechart/images/xflags.gif.pagespeed.ic.kl5njekRxy.png);
+    background-repeat: no-repeat;
+    background-size: 9.85714286rem;
+    margin: 6px 0 0
+}
+
+ul.sd_country-tab-list li span {
+    display: block;
+    clear: both;
+    font-size: 12px;
+    text-transform: capitalize;
+    font-family: arial !important;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0px 1px 0px #0000002e;
+    letter-spacing: .4px
+}
+
+ul.sd_country-tab-list li:hover, ul.sd_country-tab-list li.sd_selected {
+    background: url(https://shinedezign.tk/sizechart/images/xtab-arow.png.pagespeed.ic.o_I4sPthf3.png) no-repeat center bottom
+}
+
+.flag-usa-icon {
+    background-position: -3.28571429rem -1.14285714rem
+}
+
+.flag-uk-icon {
+    background-position: -6.57142857rem -1.14285714rem
+}
+
+.flag-italy-icon {
+    background-position: 0 0
+}
+
+.flag-france-icon {
+    background-position: -4.92857143rem 0
+}
+
+.flag-russia-icon {
+    background-position: -4.92857143rem -1.14285714rem
+}
+
+.flag-china-icon {
+    background-position: -8.21428571rem 0
+}
+
+.flag-japan-icon {
+    background-position: -1.64285714rem 0
+}
+
+.flag-australia-icon {
+    background-position: -3.28571429rem 0
+}
+
+.flag-brazil-icon {
+    background-position: 0 -1.14285714rem
+}
+
+.flag-korea-icon {
+    background-position: -6.57142857rem 0
+}
+
+.flag-eu-icon {
+    background-position: -1.64285714rem -1.14285714rem
+}
+
+.tab-table {
+    background-color: #e8e4e46e
+}
+
+.table-headng {
+    border: 2px solid #d4d2d2
+}
+
+.tab-table th {
+    border: 2px solid #d4d2d2;
+    padding: 12px 10px;
+    font-size: 13px;
+    text-align: center;
+    font-family: arial;
+    color: #333
+}
+
+.table-headng:first-child {
+    border: 2px solid #d4d2d2
+}
+
+.inc {
+}
+
+.tab-table td {
+    text-align: center;
+    font-size: 13px;
+    color: #5c5c5c;
+    padding: 7px 5px;
+    border: 2px solid #d4d2d2;
+    font-family: arial
+}
+
+.sd_popup-container .tab--content table {
+    display: none
+}
+
+.sd_tabdata {
+    display: inline-table !important
+}
+
+.sd_sizelink.default:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler2.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler1:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler01.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler2:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler2.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler3:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler3.svg);
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 25px 25px !important;
+    position: relative;
+    left: -6px;
+    top: 5px
+}
+
+.sd_sizelink.sdruler4:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler4.svg);
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 25px 25px !important;
+    position: relative;
+    left: -7px;
+    top: 7px
+}
+
+.sd_sizelink.sdruler5:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler5.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler6:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler6.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler7:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler7.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler8:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler8.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler9:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler9.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler10:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler10.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler11:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler11.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler12:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler12.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler13:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler13.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler14:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler14.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler15:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler15.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler16:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler16.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler17:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler17.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler18:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler18.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_sizelink.sdruler19:before {
+    content: "" !important;
+    background: url(https://shinedezign.tk/sizechart/images/ruler19.svg);
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 20px 20px !important;
+    position: relative;
+    left: -4px;
+    top: 0
+}
+
+.sd_size1_data {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    width: 100%
+}
+
+.sd_size1_data .sd_pop_below:first-child {
+    margin-bottom: 25px
+}
+
+.Sd_popfirst_panel::after {
+    display: none !important
+}
+
+.size-box-info.addleftborder::before {
+    display: none !important
+}
+
+.Sd_sizechartmodel button.pclose {
+}
+
+.sd_size_header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%
+}

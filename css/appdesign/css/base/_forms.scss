@@ -1,0 +1,97 @@
+// forms
+
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+.form-group{
+  margin: 0 0 15px;
+}
+
+select,
+.form-select,
+.custom-select,
+.form-control,
+input[type='text'],
+input[type='search'],
+input[type='tel'],
+input[type='email'],
+input[type='search'],
+input[type='password'],
+input[type='url'],
+input[type='date'],
+textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0 20px;
+  height: 40px;
+  line-height: 38px;
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 6px;
+  box-shadow: none;
+
+
+  &:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(0,128,96,0.2);
+  }
+
+  @include placeholder {
+    color: $placeholder-color;
+  }
+}
+
+input[type='search']{
+  padding: 0 20px 0 40px;
+  background-image: url("../images/22.png");
+  background-repeat: no-repeat;
+  background-size: 33px;
+  background-position: 2px center;
+
+}
+
+.form-select,
+.custom-select,
+select {
+  -webkit-border-radius: 0;
+  padding: 0 40px 0 20px;
+  background-image: url("../images/arrow.png");
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: calc(100% - 12px) center;
+  border-radius: 6px;
+}
+
+textarea {
+  resize: vertical;
+  vertical-align: top;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='file'],
+input[type='submit'] {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  cursor: pointer;
+}
+
+
+.form-check-input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0,0,0,0.3);
+}
+
+.form-check-input:checked{
+  background-color: #41a6dc;
+  border-color: #41a6dc;
+}

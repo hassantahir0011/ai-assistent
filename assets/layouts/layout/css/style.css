@@ -1,0 +1,98 @@
+.default-main-page .portlet.light.bordered>.portlet-title {
+    border-bottom: none;
+}
+.default-main-page .portlet.light.portlet-fit.portlet-form>.portlet-body {
+    padding: 15px;
+}
+.default-main-page .portlet-body button {
+    margin: 10px 0;
+}
+.default-main-page .portlet.light.portlet-fit>.portlet-title {
+    padding: 10px 20px 0px;
+    margin-bottom: 0;
+}
+.default-main-page .button-row{
+    position: relative;
+    overflow: hidden;
+    width: 157px;
+    margin: 0 auto;
+}
+.default-main-page .fa-gear{
+    font-size: 19px;
+    line-height: 17px;
+}
+.default-main-page .form-horizontal .form-group.form-md-line-input {
+    padding-top: 10px;
+    margin: 0;
+}
+.default-main-page .form .form-body, .portlet-form .form-body {
+    padding: 0px;
+    text-align: center;
+}
+.default-main-page .label-set{
+    padding: 28px 0 0px;
+}
+.default-main-page .md-checkbox-list .md-checkbox {
+    text-align: left;
+}
+.default-main-page .form-horizontal .md-checkbox-list{
+    width: 200px;
+    margin: 0 auto;
+}
+.default-main-page .form-group.form-md-line-input.has-success input {
+    text-align: center;
+}
+.margin{
+    margin: 23px 0;
+}
+.default-main-page .md-checkbox-list .md-checkbox {
+    margin-bottom:23px;
+}
+.default-main-page .md-checkbox label>.box {
+    top: 1px;
+    border: 2px solid #ccc;
+    height: 15px;
+    width: 15px;
+    z-index: 5;
+    -webkit-transition-delay: .2s;
+    -moz-transition-delay: .2s;
+    transition-delay: .2s;
+}
+.default-main-page .input-width{
+    padding: 0 70px;
+}
+.default-main-page .form-group.form-md-line-input.has-success .form-control {
+    border-bottom: 1px solid #ccc;
+}
+.default-main-page .form-group.form-md-line-input.has-success .input-group-addon {
+    color: #27a4b0;
+     border-bottom: 1px solid #ccc;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    .default-main-page .input-width{
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

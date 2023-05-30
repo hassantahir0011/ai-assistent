@@ -1,0 +1,443 @@
+
+html {
+    overflow-y: scroll;
+}
+.main_page_sniped {
+    margin-left: 12px;
+}
+.main_page_sniped .select2-container--bootstrap,
+.main_page_sniped .custom-select{
+    width: 100%;
+}
+#sample_1_filter label input{
+    width: 100%;
+    position: relative;
+    border: 1px solid #C4CDD5;
+    border-radius: 5px;
+    margin: 0;
+    font-weight: normal;
+    padding: 18px 30px;
+    font-size: 14px;
+}
+#sample_1_filter i.fa-search {
+    opacity: .5;
+    position: absolute;
+    z-index: 121;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+#sample_1 tbody tr:hover {
+    background-color: #F9FAFB;
+}
+#sample_1.no-footer {
+    border-bottom: 1px solid #ddd;
+}
+#sample_1 tr.selected,
+#sample_1 tr.selected .sorting_1,
+#sample_1 tr.selected .sorting_2,
+#sample_1 tr.selected .sorting_3
+{
+    background-color: #E1E5F2 !important;
+}
+#sample_1 th:first-child, #sample_1 td:first-child {
+    text-align: left;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.main_page_sniped ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.Polaris-Page .length-dropdown .per-page-label.cc{
+    padding:0 5px 0 2px;
+    margin: 0;
+}
+.main_page_sniped ul li{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+.main_page_sniped .right-ul{
+    float: right;
+    margin-top: 20px;
+}
+.Polaris-Page .search-filter{
+    float:left;
+    width: 87%;
+}
+.Polaris-Page .search-filter label{
+    width: 100%;
+
+}
+.Polaris-Page .search-filter label input{
+    border: none;
+    box-shadow: none;
+}
+.Polaris-Page .search-filter label i{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    margin: 0 0 0 8px;
+    bottom: 0;
+    line-height: 28px !important;
+}
+
+.Polaris-Page .search-filter .dataTables_filter{
+    float: left;
+    width: 100%;
+    margin: 0;
+}
+.Polaris-Page .length-dropdown{
+    margin-right: 0;
+    float: left;
+    width: 12%;
+}
+.Polaris-Page .length-dropdown .per-page-label{
+    margin: 0 6px 0 0;
+}
+.column-5{
+    float: left;
+    width: 50%;
+}
+.snippet-action-btns {
+    width: auto !important;
+    color: #A3A3A5 !important;
+}
+.vl {
+    border-right: 1px solid #cccccc;
+    height: 15px;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-left: 6px;
+}
+#sample_1 th {
+    background-color: white;
+    color: #212B36;
+    font-size: 85% !important;
+    font-weight: 600;
+    border-bottom: 0;
+    padding: 10px 10px 10px 18px;
+    vertical-align: middle;
+}
+.Polaris-Page {
+    max-width: 100%!important;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+}
+.switch input {display:none; !important;}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cfcfcf;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #66bf97;
+}
+.pagination>.active>a{
+    background-color: #66bf97 !important;
+    color: #fff;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(38px);
+    -ms-transform: translateX(38px);
+    transform: translateX(38px);
+}
+/*------ ADDED CSS ---------*/
+.on
+{
+    display: none;
+}
+.on, .off
+{
+    color: white;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 40%;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+.off
+{
+    color: white;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 60%;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+input:checked+ .slider .on
+    {display: block;}
+
+input:checked + .slider .off
+    {display: none;}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before { border-radius: 50%;}
+
+/*last modified css******************/
+.channel_icon a{
+    margin: 0 0 0 8px;
+    font-size: 14px;
+    width: 100%
+}
+.channel_icon{
+    display: flex;
+    align-items: center;
+}
+.channel_icon img{
+    width: 20px;
+}
+.dt-buttons .dt-button {
+    margin: 0;
+}
+.dataTables_wrapper .dt-buttons{
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
+    padding: 0 0px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+.dt-buttons .dt-button:last-child {
+    border-right: 0;
+}
+.dt-buttons .dt-button {
+    padding: 15px 16px;
+    font-size: 14px;
+    background: none;
+    border: none;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+}
+.dt-buttons .dt-button:hover {
+    background: #e6e6e6 !important;
+    border: none !important;
+    border-right: 1px solid #ccc !important;
+}
+.dt-buttons .dt-button:last-child:hover{
+    border-right: none !important;
+}
+#sample_1_filter{
+    float: left;
+    width: calc(100% - 150px);
+    /*width: 100%;*/
+    /*max-width: 900px;*/
+    /*display: grid;*/
+    /*display: inline-block;*/
+}
+#sample_1_filter label{
+    display: block;
+}
+/*rz css*/
+.editDell_btn{
+    display: flex;
+    max-width:130px;
+    width:100%;
+    padding: 0 0 0 28px;
+}
+/*register webhooks internel css*/
+
+#sample_1_length {
+    float: right;
+}
+install-sniped-main {
+    position: relative;
+}
+#sample_1 thead .sorting:after,
+#sample_1 thead .sorting_asc:after,
+#sample_1 thead .sorting_desc:after {
+    content: " ";
+}
+.registered-webhook-table .sorting_1{
+    background: none !important;
+}
+.dataTables_filter label{
+    position: relative;
+}
+.pagination li a {
+    color: #000;
+}
+div.dataTables_wrapper div.dataTables_length select {
+    width: 75px;
+    display: inline-block;
+    padding: 1rem;
+    height: auto;
+    border-radius: 5px;
+}
+.dataTables_wrapper .per-page-label{
+    padding: 0 8px;
+}
+/*MEdia Querious*/
+@media only screen and (max-width: 1300px) {
+    .btn-group button {
+        width: 100% !important;
+    }
+
+    .btn-group.open > .dropdown-menu {
+        height: auto !important;
+    }
+
+    .input-small {
+        margin-left: 0px !important;
+    }
+
+    .per-page-label {
+        font-weight: normal !important;
+        padding: 0 8px 0 8px;
+    }
+
+    table.dataTable td.select-checkbox:before {
+        margin-left: -12px !important;
+    }
+
+    .Polaris-Heading {
+        font-size: 20px !important;
+    }
+    .Polaris-ActionList {
+        padding-left: 10px !important;
+    }
+    #sample_1_filter label {
+        width: 100% !important;
+    }
+    .bold {
+        font-weight: normal !important;
+        margin-right: 10px;
+    }
+    .Polaris-Label__Text {
+        margin-top: 6px;
+    }
+    .upper-section {
+        max-width: 100% !important;
+    }
+    .col-sm-2 {
+        padding-right: 0px !important;
+    }
+    .fa {
+        font-style: normal;
+        font-variant-ligatures: normal;
+        font-variant-caps: normal;
+        font-variant-numeric: normal;
+        font-variant-east-asian: normal;
+        font-weight: normal;
+        font-stretch: normal;
+        font-size: inherit;
+        line-height: 1.5 !important;
+        font-family: FontAwesome;
+        margin-left: 14px;
+    }
+    table.dataTable td.select-checkbox:before, table.dataTable td.select-checkbox:after {
+        left: 46.5% !important;
+    }
+    table.dataTable tr.selected td.select-checkbox:after {
+        margin-top: -10px !important;
+        margin-left: -12px !important;
+    }
+}
+@media screen and (max-width: 1150px) {
+    .main_page_sniped .custom-select{
+        width: 115px;
+    }
+}
+@media screen and (max-width: 1024px){
+    .Polaris-Page .search-filter {
+        width: 100%;
+    }
+    .Polaris-Page .length-dropdown{
+        float: left;
+        width: 19%;
+    }
+    .channel_icon a {
+        line-height: 16.2px;
+    }
+    #sample_1_length {
+        float: left;
+    }
+}
+@media screen and (max-width: 768px){
+.right-content-section{
+    overflow: hidden;
+}
+    #sample_1 th:first-child, #sample_1 td:first-child{
+        padding: 4px 0 0 0px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .column-5{
+        float: left;
+        width: 100%;
+    }
+    .main_page_sniped .right-ul {
+        float: left;
+        margin-top: 0;
+    }
+    #section-parent-container .row {
+        flex-wrap: initial;
+    }
+}
+@media screen and (max-width: 580px) {
+    .table-scroll .dataTables_info{
+        white-space: pre-line !important;
+        font-size: 12px;
+    }
+    #sample_1_filter{
+        width: calc(100% - 0px);
+    }
+    .reg-webhooks-page, .logs-page{
+        padding: 12px;
+    }
+}
+@media screen and (max-width: 380px) {
+    .main_page_sniped table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before {
+        top: 11px;
+    }
+    table.dataTable.dtr-column>tbody>tr>td.control:before, table.dataTable.dtr-column>tbody>tr>th.control:before{
+        top: 40%;
+        left: -63%;
+        line-height: 17.9px;
+    }
+    #sample_1 th, #sample_1 td {
+        /*padding-left: 20px;*/
+    }
+    .dataTables_filter input::placeholder {
+        font-size: 12px;
+    }
+}
+
+

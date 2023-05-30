@@ -1,0 +1,125 @@
+
+body.production {
+  /*background-color: white !important;*/
+  /*padding: 5px 35px;*/
+}
+
+.notification,
+.faq-list {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.faq-list > li {
+  margin: 0 0 5px;
+  padding: 0;
+  list-style: none;
+  border:1px solid  rgba(0,0,0,0.1);
+  border-radius: 5px;
+}
+
+.faq-list > li:last-child {
+  border-bottom-width: 1px;
+}
+
+.faq-list > li .question {
+  position: relative;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.faq-list > li .question:hover {
+  /*background-image: linear-gradient(90deg, #5c6ac4 0%, #5c6ac4 8px, transparent 8px, transparent 100%);*/
+  text-decoration: none;
+  background: rgba(0,128,96,0.07);
+  color: #66bf97;
+}
+.notification li .question i{
+  position: absolute;
+  top: 19px;
+  left: 14px;
+  font-size: 10px;
+}
+.notification li .question {
+  padding-left: 40px;
+}
+.faq-list > li .question:hover::before {
+  color:#66bf97;
+}
+
+.faq-list > li.expanded .question::before {
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.faq-list > li .question::before {
+  content: '';
+  position: absolute;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  border: 1px solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  right: 15px;
+  top: 20px;
+}
+
+.faq-list > li .question[aria-expanded="true"]::before {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.faq-list .answer {
+  /*padding-left: 2.5em;*/
+  display: none;
+  overflow: hidden;
+  padding: 20px 30px;
+}
+
+.faq-list .answer p:last-child{
+  margin: 0;
+}
+
+.faq-list > li.expanded {
+  background: rgba(0,128,96,0.05);
+}
+.faq-list > li.expanded .question{
+  background: rgba(0,128,96,0.05);
+  color: #66bf97;
+}
+
+.faq-list > li.expanded .answer {
+  display: block;
+}
+
+.faq-list button {
+  font-size: 0.8em;
+  line-height: 1.60714em;
+  border: none;
+  padding: .5em;
+  text-transform: uppercase;
+  background-color: transparent;
+  cursor: pointer;
+  color: #66bf97;
+  font-weight: 500;
+}
+
+
+ul.bullet {
+  padding-left: 25px;
+}
+
+ul.bullet li {
+  list-style: disc;
+}

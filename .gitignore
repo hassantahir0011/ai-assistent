@@ -1,0 +1,17 @@
+/node_modules
+/public/storage
+/project/storage/*.key
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/project/.env
+.idea/workspace.xml
+web.config
+.idea
+/project/resources/views/arranging-elements.liquid
+/project/resources/views/raw_html_for_alignment.blade.php
+encryption_key.txt
+live-app-connector-credentials.txt
+ToDos
