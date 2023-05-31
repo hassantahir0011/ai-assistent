@@ -38,6 +38,7 @@ use App\Services\ProcessTenderTransactionsWebhooksLib;
 use App\Services\ProcessThemeWebhooksLib;
 use App\Services\WebhookLogs;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class WebhookManagementController extends Controller
 {
@@ -216,137 +217,130 @@ class WebhookManagementController extends Controller
 
     }
 
-    public function webhook_logs()
+    public function products()
     {
         return view('logs.webhook_logs');
     }
-    public
-    function store_logs(Request $request)
+
+    public function product(Request $request)
     {
+        if(!$request->id) return redirect()->back();
         $shop = session('shop');
-        $shop_id = $shop['shop_id'];
-        $qry = WebhookLog::where('shop_id', $shop_id)
-            ->join('webhook_topics', 'webhook_logs.webhook_topic_id', '=', 'webhook_topics.id', 'inner')
-            ->join('webhook_events', 'webhook_topics.webhook_event_id', '=', 'webhook_events.id', 'inner')
-            ->select('webhook_logs.*', 'webhook_topics.webhook_event_id', 'webhook_topics.topic_name', 'webhook_events.event_name as webhook_event_name', 'webhook_events.slug as webhook_event_slug');
+        try {
+            $client = new Client([
+                'base_uri' => 'https://' . $shop['myshopify_domain'] . '/admin/api/2023-01/',
+                'headers' => [
+                    'X-Shopify-Access-Token' => $shop['access_token'],
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
+            $url = "products/$request->id.json";
+            $response = $client->request('GET', $url);
 
-        if (!empty($_REQUEST['sSearch'])) {
-            session()->put('sSearch', $_REQUEST['sSearch']);
-            $search = $_REQUEST['sSearch'];
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_topics.topic_name', 'LIKE', '%' . $search . '%');
-            });
-        } else {
-            session()->forget('sSearch');
+            // Extract the data from the response body
+            $product = json_decode($response->getBody(), true);
+            $product = $product['product'] ?? [];
+            return view('logs.product', compact('product'));
         }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+            return json_encode(array('data' => [], 'recordsTotal' => 0, 'recordsFiltered' => 0));
+        }
+    }
+    public
+    function store_logs(Request $request){
+        $shop = session('shop');
+        try {
+            $client = new Client([
+                'base_uri' => 'https://' . $shop['myshopify_domain'] . '/admin/api/2023-01/',
+                'headers' => [
+                    'X-Shopify-Access-Token' => $shop['access_token'],
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
 
-        if(!empty($_REQUEST['webhook_status']))
-        {
+            $url = 'products/count.json';
 
-            $search = $_REQUEST['webhook_status'];
-            if($search == 'success'){
-                $search = 1;
-            }else{
-                $search = 0;
+            $response = $client->request('GET', $url);
+            $products_count = json_decode($response->getBody(), true);
+            $products_count = $products_count['count'] ?? 0;
+
+            if ($products_count > 0) {
+                $url = 'products.json?fields=id%2Ctitle%2Cimage';
+
+                if (!empty($_REQUEST['sSearch'])) {
+                    session()->put('storeLogSearch', $_REQUEST['sSearch']);
+                    $search = $_REQUEST['sSearch'];
+                    $url .= '&ids=' . $search;
+                } else {
+                    session()->forget('storeLogSearch');
+                }
+
+                if ($_REQUEST['iDisplayLength']) {
+                    $limit = $_REQUEST['iDisplayLength'];
+                    $url .= '&limit=' . $limit;
+                }
+
+                if ($_REQUEST['iDisplayStart']) {
+                    $offset = $_REQUEST['iDisplayStart'];
+                    (session()->get('storeLogDisplayStart') ?? 0) < $offset ? $url .= '&page_info=' . $_REQUEST['nextPageInfo'] : $url .= '&page_info=' . $_REQUEST['previousPageInfo'];
+                    session()->put('storeLogDisplayStart', $_REQUEST['iDisplayStart']);
+                } else {
+                    session()->forget('storeLogDisplayStart');
+                }
+                $response = $client->request('GET', $url);
+
+                // Extract the page_info for the next page from the Link header (if available)
+                $linkHeader = $response->getHeader('Link')[0] ?? "";
+                $links = explode(',', $linkHeader);
+
+                $nextLink = null;
+                $previousLink = null;
+
+                foreach ($links as $link) {
+                    if (strpos($link, 'rel="next"') !== false) {
+                        $nextLink = $link;
+                    }
+                    if (strpos($link, 'rel="previous"') !== false) {
+                        $previousLink = $link;
+                    }
+                }
+                if (preg_match('/page_info=([^>]*)>/', $nextLink, $matches)) {
+                    $nextPageInfo = isset($matches[1]) ? $matches[1] : null;
+                } else {
+                    $nextPageInfo = '';
+                }
+                if (preg_match('/page_info=([^>]*)>/', $previousLink, $matches)) {
+                    $previousPageInfo = isset($matches[1]) ? $matches[1] : null;
+                } else {
+                    $previousPageInfo = '';
+                }
+
+                // Extract the data from the response body
+                $products = json_decode($response->getBody(), true);
+                $products = $products['products'] ?? [];
+
+                $data = [];
+                if (count($products) > 0) {
+                    $serial = $_REQUEST['iDisplayStart'];
+                    foreach ($products as $row):
+                        $serial++;
+                        $obj = new \stdClass;
+                        $obj->serial_no = $serial;
+                        $obj->id = $row['id'];
+                        $obj->title = $row['title'];
+                        $obj->image_url = $row['image']['src'] ?? env('APP_URL')."/css/appdesign/images/shopify-img.png";
+                        $data[] = $obj;
+                    endforeach;
+                }
+                return json_encode(array('data' => $data, 'recordsTotal' => count($products), 'recordsFiltered' => $products_count, 'previousPageInfo' => $previousPageInfo, 'nextPageInfo' => $nextPageInfo));
             }
-
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_logs.status',$search);
-            });
+            return json_encode(array('data' => [], 'recordsTotal' => 0, 'recordsFiltered' => 0));
         }
-
-        if(!empty($_REQUEST['trigger_at']))
-        {
-            $search = $_REQUEST['trigger_at'];
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_logs.created_at', 'LIKE', '%' . $search . '%');
-            });
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+            return json_encode(array('data' => [], 'recordsTotal' => 0, 'recordsFiltered' => 0));
         }
-        if ($_REQUEST['iDisplayStart']) {
-            $offset = $_REQUEST['iDisplayStart'];
-            $qry->offset($offset);
-        }
-
-        if ($_REQUEST['iDisplayLength']) {
-            $limit = $_REQUEST['iDisplayLength'];
-            $qry->limit($limit);
-        }
-
-        if (isset($_REQUEST['iSortCol_0']) && isset($_REQUEST['sSortDir_0'])) {
-
-            $sort_order = $_REQUEST['sSortDir_0'];
-            $sort_column_number = $_REQUEST['iSortCol_0'];
-            $sort_column = [
-                5 => 'created_at', 3 => 'status', 1 => 'channel_name'];
-            if (!array_key_exists($sort_column_number, $sort_column)) {
-                $column = 'id';
-                $sort_order = 'desc';
-            } else {
-                $column = $sort_column[$sort_column_number];
-            }
-            $qry->orderBy($column, $sort_order);
-        }
-        $store_snippets = $qry->get();
-        $data = [];
-        if (count($store_snippets) > 0) {
-            $serial = $_REQUEST['iDisplayStart'];
-            foreach ($store_snippets as $row):
-                $serial++;
-                $obj = new \stdClass;
-                $obj->serial_no = $serial;
-                $obj->topic_name = $row->topic_name;
-                $obj->status = $row->status;
-                $obj->retries_left = $row->retries_left;
-                $obj->channel_name = ucwords(str_replace('_', ' ', config('channel.name')));
-                $obj->icon_path = config('channel.icon_path');
-                $obj->message = $row->message;
-                $obj->edit_route = $row->channel_config_id ? route('channel_config', [$row->webhook_event_slug, $row->channel_config_id]) : "";
-                $obj->retry_action = $row->channel_config_id ? route('channel_config', [$row->webhook_event_slug, $row->channel_config_id])."?retry_id=$row->id" : "";
-//                $obj->retry_action = route('retry_failed_webhook',$row->id);
-                $obj->created_at = getCreatedAtAttribute($row->created_at, $shop);
-                $obj->updated_at = humanDateFormat($row->updated_at);
-                $obj->id = $row->id;
-                $data[] = $obj;
-            endforeach;
-
-        }
-        $qry = WebhookLog::where('shop_id', $shop_id)
-            ->join('webhook_topics', 'webhook_logs.webhook_topic_id', '=', 'webhook_topics.id', 'inner');
-        if (!empty($_REQUEST['sSearch'])) {
-            session()->put('sSearch', $_REQUEST['sSearch']);
-            $search = $_REQUEST['sSearch'];
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_topics.topic_name', 'LIKE', '%' . $search . '%');
-            });
-        }
-        if(!empty($_REQUEST['webhook_status']))
-        {
-
-            $search = $_REQUEST['webhook_status'];
-            if($search == 'success'){
-                $search = 1;
-            }else{
-                $search = 0;
-            }
-
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_logs.status',$search);
-            });
-        }
-        if(!empty($_REQUEST['trigger_at']))
-        {
-            $search = $_REQUEST['trigger_at'];
-            $qry->where(function ($query) use ($search) {
-                $query->orWhere('webhook_logs.created_at', 'LIKE', '%' . $search . '%');
-            });
-        }
-        $filtered_count = $qry->count();
-
-        $count = WebhookLog::where('shop_id', $shop_id)
-            ->join('webhook_topics', 'webhook_logs.webhook_topic_id', '=', 'webhook_topics.id', 'inner')->count();
-
-        return json_encode(array('data' => $data, 'recordsTotal' => $count, 'recordsFiltered' => $filtered_count));
-
     }
 
 

@@ -58,7 +58,8 @@ Route::group(['middleware' => 'ShopAuth'], function () {
     Route::get('store_logs/', 'WebhookManagementController@store_logs')
         ->name('store_logs');
     Route::post('delete_logs', 'WebhookManagementController@delete_logs')->name('delete_logs');
-    Route::get('webhook_logs/', 'WebhookManagementController@webhook_logs')->name('webhook_logs');
+    Route::get('products/', 'WebhookManagementController@products')->name('products');
+    Route::get('product', 'WebhookManagementController@product')->name('product');
     Route::post('retry_failed_webhook/{id}', 'WebhookManagementController@retry_failed_webhook')->name('retry_failed_webhook');
 
     Route::delete('delete_registered_webhook/{id}', ['uses' => 'WebhookManagementController@delete_registered_webhook', 'as' => 'delete_registered_webhook']);
@@ -83,7 +84,7 @@ Route::group(['middleware' => 'ShopAuth'], function () {
     Route::any('billing_page', 'ShopifyController@billing_page')->name('billing_page');
     Route::get('webhook_event_doc', 'Admin\DocsController@webhook_event_doc')->name('webhook_event_doc');
     Route::get('dashboard', 'WebhookManagementController@index')->name('dashboard');
-    Route::get('product', 'ProductController@product_list')->name('product');
+//    Route::get('product', 'ProductController@product_list')->name('product');
 
     Route::get('automate', 'WebhookManagementController@webhookSettings')->name('automate');
     Route::get('favorites', 'WebhookManagementController@getFavorites')->name('getFavorites');
