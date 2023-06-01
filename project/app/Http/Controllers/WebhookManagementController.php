@@ -247,6 +247,40 @@ class WebhookManagementController extends Controller
             return json_encode(array('data' => [], 'recordsTotal' => 0, 'recordsFiltered' => 0));
         }
     }
+
+    public function update_product(Request $request)
+    {
+        if(!$request->id || !$request->body_html) return response()->json(['code' => 400, 'status' => 'error',
+            'message' => "Missing required data"
+        ], 400);
+        $shop = session('shop');
+        try {
+            $client = new Client([
+                'base_uri' => 'https://' . $shop['myshopify_domain'] . '/admin/api/2023-01/',
+                'headers' => [
+                    'X-Shopify-Access-Token' => $shop['access_token'],
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
+            $url = "products/$request->id.json";
+            $data['body'] = json_encode(["product" => ["body_html" => $request->body_html]]);
+            $response = $client->request('PUT', $url, $data);
+
+            // Extract the data from the response body
+            $product = json_decode($response->getBody(), true);
+            $product = $product['product'] ?? [];
+            return response()->json(['code' => 200, 'status' => 'success',
+                'message' => "$product[title] updated successfully"
+            ], 200);
+        }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+
+            return response()->json(['code' => 500, 'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     public
     function store_logs(Request $request){
         $shop = session('shop');

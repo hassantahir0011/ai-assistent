@@ -60,6 +60,7 @@ Route::group(['middleware' => 'ShopAuth'], function () {
     Route::post('delete_logs', 'WebhookManagementController@delete_logs')->name('delete_logs');
     Route::get('products/', 'WebhookManagementController@products')->name('products');
     Route::get('product', 'WebhookManagementController@product')->name('product');
+    Route::post('product', 'WebhookManagementController@update_product')->name('update_product');
     Route::post('retry_failed_webhook/{id}', 'WebhookManagementController@retry_failed_webhook')->name('retry_failed_webhook');
 
     Route::delete('delete_registered_webhook/{id}', ['uses' => 'WebhookManagementController@delete_registered_webhook', 'as' => 'delete_registered_webhook']);
