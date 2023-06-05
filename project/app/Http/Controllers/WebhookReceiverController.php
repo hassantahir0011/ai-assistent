@@ -7,6 +7,7 @@ use App\Entities\WebhookEvent;
 use App\Jobs\ProcessShopifyWebhooks;
 use App\Services\WebhookLogs;
 use Illuminate\Http\Request;
+use OpenAI\Laravel\Facades\OpenAI;
 
 
 class WebhookReceiverController extends Controller
@@ -76,10 +77,16 @@ class WebhookReceiverController extends Controller
 
     }
     function testing(){
-        foreach (WebhookEvent::all() as $channel) {
-            \DB::table('webhook_events')
-                ->where('event_name', $channel->event_name)
-                ->update(['slug' => $this->slugify($channel->event_name)]);
+        try{
+            $result = OpenAI::completions()->create([
+                'model' => 'text-davinci-003',
+                'prompt' => 'PHP is',
+            ]);
+            dd($result);
+        }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+            \Log::info($e->getTraceAsString());
         }
         echo "done";
     }
