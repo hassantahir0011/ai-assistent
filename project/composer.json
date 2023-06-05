@@ -16,7 +16,8 @@
         "league/oauth2-client": "^2.5",
         "symfony/http-client": "^6.1",
         "symfony/mailer": "^6.1",
-        "predis/predis" : "2.0.0"
+        "predis/predis" : "2.0.0",
+        "openai-php/laravel": "^0.5.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

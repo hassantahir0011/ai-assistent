@@ -281,6 +281,108 @@ class WebhookManagementController extends Controller
             ], 500);
         }
     }
+
+    public function upload_images(Request $request)
+    {
+        if(!$request->id || !$request->selected_images) return response()->json(['code' => 400, 'status' => 'error',
+            'message' => "Missing required data"
+        ], 400);
+        $shop = session('shop');
+        try {
+            $client = new Client([
+                'base_uri' => 'https://' . $shop['myshopify_domain'] . '/admin/api/2023-01/',
+                'headers' => [
+                    'X-Shopify-Access-Token' => $shop['access_token'],
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
+            $url = "products/$request->id.json";
+            $images = [];
+            if($request->existing_images) foreach (explode(',', $request->existing_images) as $img_id) $images[] = ["id" => $img_id];
+            foreach ($request->selected_images as $img_src) $images[] = ["src" => $img_src];
+            $data['body'] = json_encode(["product" => ["images" => $images]]);
+            $response = $client->request('PUT', $url, $data);
+
+            // Extract the data from the response body
+            $product = json_decode($response->getBody(), true);
+            $product = $product['product'] ?? [];
+            return response()->json(['code' => 200, 'status' => 'success',
+                'message' => "$product[title] updated successfully"
+            ], 200);
+        }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+
+            return response()->json(['code' => 500, 'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function generate_images(Request $request)
+    {
+        if(!$request->id || !$request->title || !$request->body_html) return response()->json(['code' => 400, 'status' => 'error',
+            'message' => "Missing required data"
+        ], 400);
+        $shop = session('shop');
+        try {
+            $client = new Client([
+                'base_uri' => 'https://stablediffusionapi.com/api/v3/',
+                'headers' => [
+                    'X-Shopify-Access-Token' => $shop['access_token'],
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
+            $req_body = [
+                "key" => "mpAf2QJ39xunisE4Z3PsRnxIWI6pYLmebtKKvRflNhNGiofVWI5KwTWsKBJb",
+                "prompt" => "ultra realistic close up portrait for a product ( Title ($request->title) and Description (".strip_tags($request->body_html)."))",
+                "negative_prompt" => null,
+                "width" => "512",
+                "height" => "512",
+                "samples" => $request->samples ?? "3",
+                "num_inference_steps" => "20",
+                "seed" => null,
+                "guidance_scale" => 7.5,
+                "safety_checker" => "yes",
+                "multi_lingual" => "no",
+                "panorama" => "no",
+                "self_attention" => "no",
+                "upscale" => "no",
+//                    "embeddings_model" => "embeddings_model_id",
+                "webhook" => null,
+                "track_id" => null
+            ];
+            if(!$request->img_src) $url = "text2img";
+            else{
+                $url = "img2img";
+                $req_body += ["init_image" =>  $request->img_src];
+            }
+            $data['body'] = json_encode($req_body);
+            $response = $client->request('POST', $url, $data);
+
+            // Extract the data from the response body
+            \Log::info($data['body']);
+            \Log::info($response->getBody());
+            $response = json_decode($response->getBody(), true);
+            if($response['status']){
+                return response()->json(['code' => 200, 'status' => 'success',
+                    'message' => "Imgaes created successfully", "output" => $response['output']
+                ], 200);
+            }
+
+            $product = $product['product'] ?? [];
+            return response()->json(['code' => 200, 'status' => 'error',
+                'message' => $response['message'], "tip" => $response['tip']
+            ], 200);
+        }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+
+            return response()->json(['code' => 500, 'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     public
     function store_logs(Request $request){
         $shop = session('shop');
