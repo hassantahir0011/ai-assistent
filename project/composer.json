@@ -14,9 +14,10 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.1",
         "league/oauth2-client": "^2.5",
+        "openai-php/client": "^0.5.2",
+        "predis/predis": "2.0.0",
         "symfony/http-client": "^6.1",
-        "symfony/mailer": "^6.1",
-        "predis/predis" : "2.0.0"
+        "symfony/mailer": "^6.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -64,6 +65,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
