@@ -246,6 +246,40 @@ return [
         ]
 
     ],
+
+    'quill' => [
+        'css' => [
+            "https://cdn.quilljs.com/1.3.6/quill.snow.css"
+        ],
+        'js' => [
+            'before-appjs' => [
+                'https://cdn.quilljs.com/1.3.6/quill.js'
+            ]
+            ,
+            'after-appjs' => [
+
+            ]
+        ]
+
+    ],
+
+    'bootstrap' => [
+        'css' => [
+            "https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        ],
+        'js' => [
+            'before-appjs' => [
+                'https://code.jquery.com/jquery-3.4.1.slim.min.js',
+                'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
+                'https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js'
+            ]
+            ,
+            'after-appjs' => [
+
+            ]
+        ]
+
+    ],
     'select2' => [
         'css' => [
             //'assets/global/plugins/select2/css/select2.min.css',

@@ -33,37 +33,37 @@
                         <span class=" menu-text">Dashboard</span>
                     </a>
                 </li>
+{{--                <li>--}}
+{{--                    <a class="nav-link text-truncate" href="{{ route('registered_webhooks') }}">--}}
+{{--                        <span class=" menu-text">Registered Webhooks</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="nav-link text-truncate" href="{{ route('automate') }}">--}}
+{{--                        <span class=" menu-text">Automate</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li>
-                    <a class="nav-link text-truncate" href="{{ route('registered_webhooks') }}">
-                        <span class=" menu-text">Registered Webhooks</span>
+                    <a class="nav-link text-truncate" href="{{ route('products') }}">
+                        <span class=" menu-text">Products</span>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link text-truncate" href="{{ route('automate') }}">
-                        <span class=" menu-text">Automate</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link text-truncate" href="{{ route('webhook_logs') }}">
-                        <span class=" menu-text">Logs</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link text-truncate" href="{{ route('notification.index') }}">
-                        <span class=" menu-text">Notifications</span>
-                        @php
-                            $notfications_count = \App\Entities\Notification::where("shop_id", session('shop')['shop_id'])->where('marked_as_read', false)->count();
-                        @endphp
+{{--                <li>--}}
+{{--                    <a class="nav-link text-truncate" href="{{ route('notification.index') }}">--}}
+{{--                        <span class=" menu-text">Notifications</span>--}}
+{{--                        @php--}}
+{{--                            $notfications_count = \App\Entities\Notification::where("shop_id", session('shop')['shop_id'])->where('marked_as_read', false)->count();--}}
+{{--                        @endphp--}}
 
-                        @if($notfications_count > 0)
-                            <span class="notification-counter">{{ $notfications_count }}</span>
-                        @endif
-                    </a>
-                </li>
+{{--                        @if($notfications_count > 0)--}}
+{{--                            <span class="notification-counter">{{ $notfications_count }}</span>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
             <!--            <li>
-                <a class="nav-link text-truncate" href="{{ route('webhook_logs') }}">
-                    <span class=" menu-text">Logs</span>
+                <a class="nav-link text-truncate" href="{{ route('products') }}">
+                    <span class=" menu-text">Products</span>
                 </a>
             </li>
             <li>
