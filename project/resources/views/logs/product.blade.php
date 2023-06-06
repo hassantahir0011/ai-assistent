@@ -16,45 +16,109 @@ $asset_controls = [
             z-index: 1050 !important;
         }
     </style>
-    <section class="section">
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>{{ $product['title'] }}</h2>
-
-                    <div class="card mb-3">
-                        <img src="{{ $product['image']['src'] ?? env('APP_URL')."/css/appdesign/images/shopify-img.png" }}" class="card-img-top" alt="Product Thumbnail">
-                        @if(count($product['images']))
-                            <div class="card-body">
-                                <h5 class="card-title">Product Images</h5>
-                                @foreach ($product['images'] as $image)
-                                    <img src="{{ $image['src'] }}" class="img-fluid" alt="Product Image">
-                                @endforeach
-                            </div>
-                        @endif
-                        <button class="btn btn-primary mt-3" onclick="generateImages()">Auto Generate Images From Title & Description</button>
-                        <button class="btn btn-secondary mt-3" onclick="generateImages('{{ $product['image']['src'] ?? "" }}')">Auto Generate Images From Thumbnail</button>
-                    </div>
+    <main id="main">
+        <section class="section productPage">
+            <div class="container">
+                <div class="text-right pb-5">
+                    <button class="btn" onclick="postToShopify()">Post to Shopify</button>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Description</h5>
-                            <div id="productDescription" style="height: 200px;">{!! $product['body_html'] !!}</div>
+                <div class="mainbox">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-box">
+                                <img src="{{ $product['image']['src'] ?? env('APP_URL')."/css/appdesign/images/shopify-img.png" }}" class="card-img-top" alt="Product Thumbnail">
+                            </div>
+                            <hr />
+                            <div class="card mb-3 p-0">
+                                @if(count($product['images']))
+                                    <div class="card-body bg-transparent">
+                                        <h5 class="card-title">Product Images</h5>
+                                        <ul class="productList">
+                                            @foreach ($product['images'] as $image)
+                                                <li>
+                                                    <div class="img-box">
+                                                        <img src="{{ $image['src'] }}" class="img-fluid" alt="Product Image">
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Auto Generate Images From </label>
+                                            <select class="form-select">
+                                                <option>Title & Description</option>
+                                                <option>Thumbnail</option>
+                                                <option>Custom Prompt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary mt-3" onclick="generateImages()">Auto Generate Images From Title & Description</button>
+                                        <button class="btn btn-secondary mt-3" onclick="generateImages('{{ $product['image']['src'] ?? "" }}')">Auto Generate Images From Thumbnail</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul id="generated_images" class="genrateImg">
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>{{ $product['title'] }}</h2>
+                            <div class="card">
+                                <div class="card-body  bg-transparent p-0">
+                                    <h5 class="card-title">Description</h5>
+                                    <div id="productDescription" style="height: 200px;">{!! $product['body_html'] !!}</div>
+                                </div>
+                            </div>
+{{--                            <button class="btn mt-3 slideButton"  data-toggle="modal" data-target="#productModal">Auto Generate Description</button>--}}
+                            <button class="btn mt-3 slideButton test-action-btn">Auto Generate Description</button>
+                            <div class="slideBox">
+                                <div class="p-3">
+                                    <div class="input-field form-group">
+                                        <label for="prompt">Enter Custom Prompt</label>
+                                        <textarea id="prompt" class="form-control" placeholder="Define your product and its key features..." type="text"> </textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label for="generateOptions" class="form-label">Generate Description:</label>
+                                            <select id="generateOptions" class="form-select" aria-label="Generate Description">
+                                                <option selected value="titleOnly">Title Only</option>
+                                                <option value="titleAndPrompt">Title and Custom Prompt</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="wordCount" class="form-label">Number of Words:</label>
+                                            <select id="wordCount" class="form-select" aria-label="Number of Words">
+                                                <option selected value="100">100 words</option>
+                                                <option value="250">250 words</option>
+                                                <option value="500">500 words</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="formatOptions" class="form-label">Format:</label>
+                                            <select id="formatOptions" class="form-select" aria-label="Format">
+                                                <option selected value="html">Formatted</option>
+                                                <option value="plainText">Plain Text</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="button" onclick="generateDescription()" class="btn">Generate Description</button>
+                                </div>
+                            </div>
+{{--                            <button class="btn btn-success mt-3" onclick="postToShopify()">Post to Shopify</button>--}}
                         </div>
                     </div>
 
-                    <button class="btn btn-primary mt-3"  data-toggle="modal" data-target="#productModal">Auto Generate Description</button>
-                    <button class="btn btn-success mt-3" onclick="postToShopify()">Post to Shopify</button>
+                    <div class="row">
+                        <button class="btn btn-success mt-3" onclick="postImagesToShopify()">Upload Images to Shopify</button>
+                    </div>
                 </div>
+
             </div>
-            <div id="generated_images" class="row">
-            </div>
-            <div class="row">
-                <button class="btn btn-success mt-3" onclick="postImagesToShopify()">Upload Images to Shopify</button>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Modal -->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -267,17 +331,14 @@ $asset_controls = [
                         var loop = 0;
                         var images = result.output.map(img => {
                             loop++;
-                            return '<div class="col-md-4 mb-4">\
-                            <div class="card">\
-                                <img src="'+img+'" class="card-img-top" alt="Product Image">\
-                                    <div class="card-body">\
+                            return '<li>\
                                         <div class="form-check">\
                                             <input class="form-check-input" type="checkbox" id="image-'+loop+'" value="'+img+'">\
-                                                <label class="form-check-label" for="image-'+loop+'">Select</label>\
+                                            <label class="form-check-label" for="image-'+loop+'">\
+                                                <img src="'+img+'" class="card-img-top" alt="Product Image">\
+                                            </label>\
                                         </div>\
-                                    </div>\
-                            </div>\
-                        </div>';
+                                    </li>';
                         });
                         $('#generated_images').append(images);
                         swal(result.status, result.message, 'success');
@@ -298,5 +359,12 @@ $asset_controls = [
                 hide_loading_img();
             });
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.slideButton').click(function() {
+                $('.slideBox').toggleClass('active');
+            });
+        });
     </script>
 @endsection
