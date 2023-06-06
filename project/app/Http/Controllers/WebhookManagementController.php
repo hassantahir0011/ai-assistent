@@ -39,6 +39,7 @@ use App\Services\ProcessThemeWebhooksLib;
 use App\Services\WebhookLogs;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use OpenAI;
 
 class WebhookManagementController extends Controller
 {
@@ -381,6 +382,52 @@ class WebhookManagementController extends Controller
             return response()->json(['code' => 500, 'status' => 'error',
                 'message' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function generate_text(Request $request){
+        if(!$request->title) return response()->json(['code' => 400, 'status' => 'error',
+            'message' => "Missing required data"
+        ], 400);
+
+        try{
+            $yourApiKey = config('openai.api_key');
+            \Log::info($yourApiKey);
+            $client = OpenAI::client($yourApiKey);
+
+            $content = "Title: '$request->title' \n";
+            if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= "Description: '$request->prompt' \n";
+            $content .= "Generate a product description of $request->wordCount words for the '$request->title'";
+            if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " based on the following prompt: '$request->prompt'.";
+            $content .= " The description should be in $request->formatOption format and should focus on highlighting the unique features and benefits of the product. Avoid using pronouns or common phrases to create a more engaging and concise description.";
+
+//            $content = "write a product description for my shopify store and it should be in e-commerce style and avoid word like introducing and pronouns like i, we, our etc in the description. Product Title: '$request->title'.";
+//            if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " Prompt from user or key features are '$request->prompt'.";
+//            if($request->formatOption == 'styled') $content .= " Description should be in proper format in HTML language excluding div tag only.";
+//            if($request->wordCount) $content .= " Description must consist of $request->wordCount words.";
+            \Log::info($content);
+            $result = $client->chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => $content],
+                ],
+            ]);
+
+            \Log::info("totalTokens: ".$result->usage->totalTokens);
+            if(isset($result->choices[0]->message->content))
+                return response()->json(['code' => 200, 'status' => 'success',
+                    'message' => $result->choices[0]->message->content
+                ], 200);
+            else
+                return response()->json(['code' => 400, 'status' => 'error',
+                    'message' => "Error while generation description"
+                ], 400);
+        }
+        catch (\Exception $e){
+            \Log::info($e->getMessage());
+            return response()->json(['code' => 400, 'status' => 'error',
+                'message' => "Error while generation description. $e->getMessage()"
+            ], 400);
         }
     }
     public

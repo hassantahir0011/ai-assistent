@@ -7,6 +7,15 @@ $asset_controls = [
 ?>
 
 @section('content')
+    <style>
+        .modal-content .modal-footer {
+             background: transparent;
+             display: block;
+        }
+        .modal {
+            z-index: 1050 !important;
+        }
+    </style>
     <section class="section">
         <div class="container mt-4">
             <div class="row">
@@ -35,7 +44,7 @@ $asset_controls = [
                         </div>
                     </div>
 
-                    <button class="btn btn-primary mt-3" onclick="generateDescription()">Auto Generate Description</button>
+                    <button class="btn btn-primary mt-3"  data-toggle="modal" data-target="#productModal">Auto Generate Description</button>
                     <button class="btn btn-success mt-3" onclick="postToShopify()">Post to Shopify</button>
                 </div>
             </div>
@@ -46,6 +55,54 @@ $asset_controls = [
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $product['title'] }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-field">
+                        <label for="prompt">Enter Custom Prompt</label>
+                        <textarea id="prompt" placeholder="Define your product and its key features..." type="text"> </textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="generateOptions" class="form-label">Generate Description:</label>
+                            <select id="generateOptions" class="form-select" aria-label="Generate Description">
+                                <option selected value="titleOnly">Title Only</option>
+                                <option value="titleAndPrompt">Title and Custom Prompt</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="wordCount" class="form-label">Number of Words:</label>
+                            <select id="wordCount" class="form-select" aria-label="Number of Words">
+                                <option selected value="100">100 words</option>
+                                <option value="250">250 words</option>
+                                <option value="500">500 words</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="formatOptions" class="form-label">Format:</label>
+                            <select id="formatOptions" class="form-select" aria-label="Format">
+                                <option selected value="html">Formatted</option>
+                                <option value="plainText">Plain Text</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="generateDescription()" class="btn btn-primary">Generate Description</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('last_scripts')
@@ -56,9 +113,45 @@ $asset_controls = [
             readOnly: false
         });
 
-        function generateDescription() {
-            var generatedDescription = "This is an auto-generated description.";
-            quill.root.innerHTML = generatedDescription;
+        function generateDescription(action = false) {
+            $('#productModal').modal('hide');
+            show_loading_img();
+            $.ajax({
+                url: '{{ route('generate_text') }}',
+                type: 'POST',
+                data: {
+                    _method: 'POST',
+                    _token: "<?= Session::token() ?>",
+                    id: {{ $product['id'] }},
+                    title: '{{ $product['title'] }}',
+                    prompt: $('#prompt').val(),
+                    wordCount : $('#wordCount').val(),
+                    generateOption : $('#generateOptions').val(),
+                    formatOption : $('#formatOptions').val()
+                },
+                cache: false,
+                success: function (result) {
+                    if (result && result.status == 'success') {
+                        quill.root.innerHTML = '';
+                        $('#prompt').val('');
+                        quill.root.innerHTML = result.message;
+                        swal(result.status, 'Content created', 'success');
+                    } else {
+                        swal(result.status, result.message, 'error');
+                    }
+                    hide_loading_img();
+                }, error: function (response) {
+                    swal('Warning', 'Failed to update . Try again !!', 'warning');
+                    hide_loading_img();
+                },
+                timeout: 990000
+            }).fail(function (jqXHR, textStatus) {
+                if (textStatus === 'timeout') {
+                    swal("Sorry", 'Please Wait... Slow connection!', "error");
+
+                }
+                hide_loading_img();
+            });
         }
 
         function postToShopify() {

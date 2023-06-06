@@ -62,6 +62,7 @@ Route::group(['middleware' => 'ShopAuth'], function () {
     Route::get('product', 'WebhookManagementController@product')->name('product');
     Route::post('product', 'WebhookManagementController@update_product')->name('update_product');
     Route::post('generate-images', 'WebhookManagementController@generate_images')->name('generate_images');
+    Route::post('generate-text', 'WebhookManagementController@generate_text')->name('generate_text');
     Route::post('upload-images', 'WebhookManagementController@upload_images')->name('upload_images');
     Route::post('retry_failed_webhook/{id}', 'WebhookManagementController@retry_failed_webhook')->name('retry_failed_webhook');
 

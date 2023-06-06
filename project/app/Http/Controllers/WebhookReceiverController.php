@@ -7,7 +7,7 @@ use App\Entities\WebhookEvent;
 use App\Jobs\ProcessShopifyWebhooks;
 use App\Services\WebhookLogs;
 use Illuminate\Http\Request;
-use OpenAI\Laravel\Facades\OpenAI;
+use OpenAI;
 
 
 class WebhookReceiverController extends Controller
@@ -78,10 +78,17 @@ class WebhookReceiverController extends Controller
     }
     function testing(){
         try{
-            $result = OpenAI::completions()->create([
-                'model' => 'text-davinci-003',
-                'prompt' => 'PHP is',
+            $yourApiKey = config('openai.api_key');
+            \Log::info($yourApiKey);
+            $client = OpenAI::client($yourApiKey);
+
+            $result = $client->chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    ['role' => 'user', 'content' => "write a description for my shopify store's product Helmet. We are offering helmet with premium look and colors for their premium rides. description should be of length 750 words"],
+                ],
             ]);
+
             dd($result);
         }
         catch (\Exception $e){
