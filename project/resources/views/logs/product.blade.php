@@ -44,55 +44,55 @@ $asset_controls = [
                                         </ul>
                                     </div>
                                 @endif
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Auto Generate Images From </label>
-                                            <select class="form-select" id="imgSelector">
-                                                <option onchange="generateImages()">Title & Description</option>
-                                                <option onchange="generateImages('{{ $product['image']['src'] ?? "" }}')">Thumbnail</option>
-                                                <option value="slideBoxDropdown">Custom Prompt</option>
-                                            </select>
-                                        </div>
-                                        <div class="slideBoxSelect">
-                                            <div class="p-3">
-                                                <div class="row">
-                                                    <div class="col-md-4 form-group">
-                                                        <label for="generateOptions" class="form-label">Generate Description:</label>
-                                                        <select id="generateOptions" class="form-select" aria-label="Generate Description">
-                                                            <option selected value="titleOnly">Title Only</option>
-                                                            <option value="titleAndPrompt">Title and Custom Prompt</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label for="wordCount" class="form-label">Number of Words:</label>
-                                                        <select id="wordCount" class="form-select" aria-label="Number of Words">
-                                                            <option selected value="100">100 words</option>
-                                                            <option value="250">250 words</option>
-                                                            <option value="500">500 words</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-4 form-group">
-                                                        <label for="formatOptions" class="form-label">Format:</label>
-                                                        <select id="formatOptions" class="form-select" aria-label="Format">
-                                                            <option selected value="html">Formatted</option>
-                                                            <option value="plainText">Plain Text</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="input-field form-group">
-                                                    <label for="prompt">Enter Custom Prompt</label>
-                                                    <textarea id="prompt" class="form-control" placeholder="Define your product and its key features..." type="text"> </textarea>
-                                                </div>
-                                                <button type="button" onclick="generateDescription()" class="btn">Generate Description</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary mt-3" onclick="generateImages()">Auto Generate Images From Title & Description</button>
-                                        <button class="btn btn-secondary mt-3" onclick="generateImages('{{ $product['image']['src'] ?? "" }}')">Auto Generate Images From Thumbnail</button>
-                                    </div>
-                                </div>
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-md-12">--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>Auto Generate Images From </label>--}}
+{{--                                            <select class="form-select" id="imgSelector">--}}
+{{--                                                <option onchange="generateImages()">Title & Description</option>--}}
+{{--                                                <option onchange="generateImages('{{ $product['image']['src'] ?? "" }}')">Thumbnail</option>--}}
+{{--                                                <option value="slideBoxDropdown">Custom Prompt</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="slideBoxSelect">--}}
+{{--                                            <div class="p-3">--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-md-4 form-group">--}}
+{{--                                                        <label for="generateOptions" class="form-label">Generate Description:</label>--}}
+{{--                                                        <select id="generateOptions" class="form-select" aria-label="Generate Description">--}}
+{{--                                                            <option selected value="titleOnly">Title Only</option>--}}
+{{--                                                            <option value="titleAndPrompt">Title and Custom Prompt</option>--}}
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-4 form-group">--}}
+{{--                                                        <label for="wordCount" class="form-label">Number of Words:</label>--}}
+{{--                                                        <select id="wordCount" class="form-select" aria-label="Number of Words">--}}
+{{--                                                            <option selected value="100">100 words</option>--}}
+{{--                                                            <option value="250">250 words</option>--}}
+{{--                                                            <option value="500">500 words</option>--}}
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-4 form-group">--}}
+{{--                                                        <label for="formatOptions" class="form-label">Format:</label>--}}
+{{--                                                        <select id="formatOptions" class="form-select" aria-label="Format">--}}
+{{--                                                            <option selected value="html">Formatted</option>--}}
+{{--                                                            <option value="plainText">Plain Text</option>--}}
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="input-field form-group">--}}
+{{--                                                    <label for="prompt">Enter Custom Prompt</label>--}}
+{{--                                                    <textarea id="prompt" class="form-control" placeholder="Define your product and its key features..." type="text"> </textarea>--}}
+{{--                                                </div>--}}
+{{--                                                <button type="button" onclick="generateDescription()" class="btn">Generate Description</button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-12">--}}
+{{--                                        <button class="btn btn-primary mt-3" onclick="generateImages()">Auto Generate Images From Title & Description</button>--}}
+{{--                                        <button class="btn btn-secondary mt-3" onclick="generateImages('{{ $product['image']['src'] ?? "" }}')">Auto Generate Images From Thumbnail</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                             <ul id="generated_images" class="genrateImg">
                             </ul>
@@ -154,9 +154,9 @@ $asset_controls = [
                         </div>
                     </div>
 
-                    <div class="row">
-                        <button class="btn btn-success mt-3" onclick="postImagesToShopify()">Upload Images to Shopify</button>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <button class="btn btn-success mt-3" onclick="postImagesToShopify()">Upload Images to Shopify</button>--}}
+{{--                    </div>--}}
                 </div>
 
             </div>
