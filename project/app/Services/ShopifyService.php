@@ -177,10 +177,10 @@ class ShopifyService
             } else {
                 if ($plan_type == 'professional') {
                     $post_data = array('recurring_application_charge' => array('name' => 'Professional', 'trial_days' => 0, 'price' => config('shopify.professional_plan_price', 5), 'format' => 'json',
-                        'return_url' => $return_url, 'test' => config('shopify.app_test_mode', false)));
+                        'return_url' => $return_url, "capped_amount" => "100", "terms" => "$0.2 per 1K tokens \n $0.5 per image", 'test' => config('shopify.app_test_mode', false)));
                 } else {
                     $post_data = array('recurring_application_charge' => array('name' => 'Elite', 'trial_days' => 0, 'price' => config('shopify.elite_plan_price', 9), 'format' => 'json',
-                        'return_url' => $return_url, 'test' => config('shopify.app_test_mode', false)));
+                        'return_url' => $return_url, "capped_amount" => "200", "terms" => "$0.2 per 1K tokens \n $0.4 per image", 'test' => config('shopify.app_test_mode', false)));
                 }
                 $res = Shopify::setShopUrl($shop->myshopify_domain)->setAccessToken($shop->access_token)->post("admin/api/$this->api_version/recurring_application_charges.json", $post_data);
                 if ($res && isset($res['id'])) {

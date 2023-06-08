@@ -6,6 +6,7 @@ use App\Entities\ChannelAccount;
 use App\Entities\ChannelConfig;
 use App\Entities\ChannelEventSetting;
 use App\Entities\FavoriteConnectorWithWebhookEvent;
+use App\Entities\ProcessedJob;
 use App\Entities\Shop;
 use App\Entities\WebhookEvent;
 use App\Entities\WebhookLog;
@@ -386,6 +387,28 @@ class WebhookManagementController extends Controller
     }
 
     public function generate_text(Request $request){
+        $shop = session('shop');
+        if(!$shop) return response()->json(['code' => 440, 'status' => 'error',
+            'message' => "Session Expired. Login again!"
+        ], 440);
+
+        $shop = Shop::where('shop_id', $shop['shop_id'])->first();
+        if(!$shop) return response()->json(['code' => 404, 'status' => 'error',
+            'message' => "Details not found"
+        ], 404);
+
+        if(!$shop->current_plan_type){
+            return response()->json(['code' => 400, 'status' => 'error',
+                'message' => "Subscribe a plan first"
+            ], 400);
+        }
+
+        if($shop->current_plan_type == 'basic' && $shop->used_text_processed_jobs->sum('tokens') > ($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token'))){
+            return response()->json(['code' => 400, 'status' => 'error',
+                'message' => "Running out of trial tokens. Subscribe to a paid plan"
+            ], 400);
+        }
+
         if(!$request->title) return response()->json(['code' => 400, 'status' => 'error',
             'message' => "Missing required data"
         ], 400);
@@ -399,7 +422,7 @@ class WebhookManagementController extends Controller
             if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= "Description: '$request->prompt' \n";
             $content .= "Generate a product description of $request->wordCount words for the '$request->title'";
             if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " based on the following prompt: '$request->prompt'.";
-            $content .= " The description should be in $request->formatOption format and should focus on highlighting the unique features and benefits of the product. Avoid using pronouns or common phrases to create a more engaging and concise description.";
+            $content .= " The description should be in $request->formatOption format (compatible with Quill library on frontend input) and should focus on highlighting the unique features and benefits of the product. Avoid using pronouns or common phrases to create a more engaging and concise description.";
 
 //            $content = "write a product description for my shopify store and it should be in e-commerce style and avoid word like introducing and pronouns like i, we, our etc in the description. Product Title: '$request->title'.";
 //            if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " Prompt from user or key features are '$request->prompt'.";
@@ -414,10 +437,69 @@ class WebhookManagementController extends Controller
             ]);
 
             \Log::info("totalTokens: ".$result->usage->totalTokens);
-            if(isset($result->choices[0]->message->content))
-                return response()->json(['code' => 200, 'status' => 'success',
-                    'message' => $result->choices[0]->message->content
-                ], 200);
+
+            if(isset($result->choices[0]->message->content)) {
+                $processed_jobs = new ProcessedJob();
+                $processed_jobs->shop_id = $shop['shop_id'];
+                $processed_jobs->tokens = $result->usage->totalTokens;
+                $processed_jobs->media_type = 'text';
+                $processed_jobs->transaction_type = 'debit';
+                $processed_jobs->save();
+
+                if($shop->current_plan_type != 'basic' && $shop->used_text_processed_jobs->sum('tokens') > ($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token'))){
+                    try {
+                        $client = new Client([
+                            'base_uri' => 'https://' . $shop->myshopify_domain . '/admin/api/2023-01/',
+                            'headers' => [
+                                'X-Shopify-Access-Token' => $shop->access_token,
+                                'Content-Type' => 'application/json',
+                            ],
+                        ]);
+                        $url = 'recurring_application_charges/' . $shop->charge_id . '/usage_charges.json';
+                        $req_body = [
+                            'usage_charge' => [
+                                'description' => '$0.2 per 1K tokens',
+                                'price' => '0.2',
+                            ],
+                        ];
+                        $data['body'] = json_encode($req_body);
+                        $response = $client->request('POST', $url, $data);
+
+                        // Extract the data from the response body
+                        \Log::info($data['body']);
+                        \Log::info($response->getBody());
+                        $response = json_decode($response->getBody(), true);
+                        if($response['usage_charge']['id']){
+                            $token_purchase = new ProcessedJob();
+                            $token_purchase->shop_id = $shop->shop_id;
+                            $token_purchase->tokens = 1000;
+                            $token_purchase->media_type = 'text';
+                            $token_purchase->transaction_type = 'credit';
+                            $token_purchase->save();
+                            return response()->json(['code' => 200, 'status' => 'success',
+                                'message' => $result->choices[0]->message->content
+                            ], 200);
+                        }
+                        else{
+                            $processed_jobs->delete();
+                            return response()->json(['code' => 500, 'status' => 'error',
+                                'message' => "Running out of tokens. System couldn't proceed payment. Try Again!"
+                            ], 500);
+                        }
+                    }
+                    catch (\Exception $e){
+                        $processed_jobs->delete();
+                        \Log::info($e->getMessage());
+                        return response()->json(['code' => 500, 'status' => 'error',
+                            'message' => $e->getMessage()
+                        ], 500);
+                    }
+                }
+                else
+                    return response()->json(['code' => 200, 'status' => 'success',
+                        'message' => $result->choices[0]->message->content
+                    ], 200);
+            }
             else
                 return response()->json(['code' => 400, 'status' => 'error',
                     'message' => "Error while generation description"

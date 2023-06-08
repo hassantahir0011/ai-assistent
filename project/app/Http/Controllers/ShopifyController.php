@@ -90,6 +90,7 @@ class ShopifyController extends Controller
                 $this->shopify_service->verify_webhooks($shop_saved_object);
             }
             if ($shop_saved_object && (!$shop_saved_object->current_plan_type || $shop_saved_object->is_deleted == 1)) {
+                \Log::info("no pricing plan set");
                 return redirect()->route('plans_listing');
             }
         }

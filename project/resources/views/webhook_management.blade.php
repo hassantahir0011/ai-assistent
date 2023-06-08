@@ -128,10 +128,10 @@
                                             <h6 class="font-14">Price</h6>
                                             ${{ $shop->current_plan_type == 'elite' ? 9 : ($shop->current_plan_type == 'professional' ? 5 : 0) }}
                                         </div>
-                                        <div class="col-lg-6 py-3">
-                                            <h6 class="font-14">Tasks per month </h6>
-                                            {{ number_format($allowed_webhooks_tasks) }} per month
-                                        </div>
+{{--                                        <div class="col-lg-6 py-3">--}}
+{{--                                            <h6 class="font-14">Tasks per month </h6>--}}
+{{--                                            {{ number_format($allowed_webhooks_tasks) }} per month--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -139,23 +139,26 @@
                                 <div class="YourplanCard p-0 bg-transparent">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h4 class="mb-3 font-16">Usage</h4>
-                                        <div class="mb-3">
-                                            <div class="text-muted">Resets on {{ $plan_history_next_date }}</div>
-                                        </div>
+{{--                                        <div class="mb-3">--}}
+{{--                                            <div class="text-muted">Resets on {{ $plan_history_next_date }}</div>--}}
+{{--                                        </div>--}}
                                     </div>
+                                    @php
+                                        $used = $shop->used_text_processed_jobs->sum('tokens') == ($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token')) ? 1000 : ($shop->used_text_processed_jobs->sum('tokens') ?? 0) % 1000;
+                                    @endphp
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <p class="fst-normal mt-3"><strong>{{ $processed_webhooks }}</strong> of {{ $allowed_webhooks_tasks }} automations used</p>
+                                                <p class="fst-normal mt-3"><strong>{{ $used }}</strong> of {{ 1000 }} automations used</p>
                                             </div>
                                             <div class="progress">
-                                                <div class="progress-bar bg-success" role="progressbar" aria-label="Success example" style="width: {{ $allowed_webhooks_tasks ? ($processed_webhooks/$allowed_webhooks_tasks)*100 : 0 }}%" aria-valuenow="{{ $processed_webhooks }}" aria-valuemin="0" aria-valuemax="{{ $allowed_webhooks_tasks }}"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" aria-label="Success example" style="width: {{ ($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token')) ?? 0 ? ($used/1000)*100 : 0 }}%" aria-valuenow="{{ $used }}" aria-valuemin="0" aria-valuemax="{{ 1000 }}"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mainbox">
+                            <div class="mainbox d-none">
                                 <div class="card mb-5">
                                     <div class="card-body p-0 bg-transparent">
                                         <ul class="icon-list">

@@ -20,5 +20,7 @@ return [
     'professional_plan_price' =>env('Professional_Plan_PRICE', 5),
     'elite_plan_price' =>env('Elite_Plan_PRICE', 9),
     'app_test_mode' => env('APP_TEST_MODE', false),
+    'trial_text_token' => env('TRIAL_TEXT_TOKEN', 1000),
+    'trial_image_token' => env('TRIAL_IMAGE_TOKEN', 5),
     'scope' =>env('SHOPIFY_SCOPE','read_themes,read_products,read_customers,read_orders,read_draft_orders,read_inventory,read_locations,read_fulfillments,read_checkouts,read_locales,read_shopify_payments_disputes'),
 ];

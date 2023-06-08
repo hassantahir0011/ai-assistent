@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Entities\CustomerDataRequest;
+use App\Entities\Shop;
 use App\Entities\WebhookEvent;
 use App\Jobs\ProcessShopifyWebhooks;
 use App\Services\WebhookLogs;
 use Illuminate\Http\Request;
 use OpenAI;
+use GuzzleHttp\Client;
 
 
 class WebhookReceiverController extends Controller
@@ -78,18 +80,8 @@ class WebhookReceiverController extends Controller
     }
     function testing(){
         try{
-            $yourApiKey = config('openai.api_key');
-            \Log::info($yourApiKey);
-            $client = OpenAI::client($yourApiKey);
-
-            $result = $client->chat()->create([
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'user', 'content' => "write a description for my shopify store's product Helmet. We are offering helmet with premium look and colors for their premium rides. description should be of length 750 words"],
-                ],
-            ]);
-
-            dd($result);
+            $shop = Shop::where('shop_id', 57502138441)->first();
+            dd($shop->purchased_text_processed_jobs->sum('tokens'), ((($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token')) ?? 0) % 1000));
         }
         catch (\Exception $e){
             \Log::info($e->getMessage());

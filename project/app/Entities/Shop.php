@@ -21,6 +21,30 @@ class Shop extends Model
     {
         return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id');
     }
+    public function text_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'text');
+    }
+    public function image_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'image');
+    }
+    public function used_text_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'text')->where('transaction_type', 'debit');
+    }
+    public function used_image_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'image')->where('transaction_type', 'debit');
+    }
+    public function purchased_text_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'text')->where('transaction_type', 'credit');
+    }
+    public function purchased_image_processed_jobs()
+    {
+        return $this->hasMany('App\Entities\ProcessedJob', 'shop_id', 'shop_id')->where('media_type', 'image')->where('transaction_type', 'credit');
+    }
     public function plans_history()
     {
         return $this->hasMany('App\Entities\PlansHistory', 'shop_id', 'shop_id');

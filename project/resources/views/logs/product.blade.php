@@ -141,7 +141,7 @@ $asset_controls = [
                     }
                     hide_loading_img();
                 }, error: function (response) {
-                    swal('Warning', 'Failed to update . Try again !!', 'warning');
+                    swal('Warning', response.responseJSON.message, 'warning');
                     hide_loading_img();
                 },
                 timeout: 990000
@@ -232,7 +232,7 @@ $asset_controls = [
                     }
                     hide_loading_img();
                 }, error: function (response) {
-                    swal('Warning', 'Failed to update . Try again !!', 'warning');
+                    swal('Warning', response.responseJSON.message, 'warning');
                     hide_loading_img();
                 },
                 timeout: 15000
@@ -289,7 +289,7 @@ $asset_controls = [
                     swal('Warning', 'Failed to update . Try again !!', 'warning');
                     hide_loading_img();
                 },
-                timeout: 35000
+                timeout: 990000
             }).fail(function (jqXHR, textStatus) {
                 if (textStatus === 'timeout') {
                     swal("Sorry", 'Please Wait... Slow connection!', "error");

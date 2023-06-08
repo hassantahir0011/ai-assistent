@@ -48,9 +48,8 @@
                                                     <div class="plan-select"><a href="#" class="btn basic-submit-btn">Activate</a><span class="current"><i class="ion-checkmark-circled"> </i> &nbsp; Current Plan</span></div>
                                                 </div>
                                                 <ul class="plan-features">
-                                                    <li><i class="ion-checkmark"> </i>2 Active Webhooks</li>
-                                                    <li><i class="ion-checkmark"> </i>200 tasks per month</li>
-                                                    <li><i class="ion-checkmark"> </i>7 Days Log Retention</li>
+                                                    <li><i class="ion-checkmark"> </i>Free 1K text tokens</li>
+{{--                                                    <li><i class="ion-checkmark"> </i>5 AI images for products</li>--}}
                                                 </ul>
                                                 <input id="basic-submit-btn" style="display: none;" type="submit" name="plan_type" value="basic"/>
                                             </div>
@@ -74,39 +73,38 @@
                                                     <div class="plan-select"><a href="#" class="btn professional-submit-btn">Activate</a><span class="current"><i class="ion-checkmark"> </i>Current Plan</span></div>
                                                 </div>
                                                 <ul class="plan-features">
-                                                    <li><i class="ion-checkmark"> </i>10 Active Webhooks</li>
-                                                    <li><i class="ion-checkmark"> </i>10000 tasks per month</li>
-                                                    <li><i class="ion-checkmark"> </i>7 Days Log Retention</li>
+                                                    <li><i class="ion-checkmark"> </i>$0.2 for 100K text tokens</li>
+                                                    <li><i class="ion-checkmark"> </i>$0.5 per one AI image (Coming Soon)</li>
                                                 </ul>
                                                 <input id="professional-submit-btn" style="display: none;" type="submit" name="plan_type" value="professional"/>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 col-12 mt-mobile">
-                                            <div class="plan elite <?= $classes['elite'] ?>">
-                                                <div class="ribbon ribbon-top-right"><span>Featured</span></div>
-                                                    <div class="box">
-                                                        <header>
-                                                            <h4 class="plan-title">Elite</h4>
-                                                            <div class="plan-cost">
-                                                                <span class="sup">$</span>
-                                                                <span class="plan-price">{{ env('Elite_Plan_PRICE', 9) }}</span>
-                                                                <span class="plan-type">/month</span>
-                                                                <div class="muted">USD Billed Monthly </div>
-                                                            </div>
-                                                        </header>
-                                                        <div class="text">
-                                                            <p>Suitable for Shopify Advanced and Plus Store users.</p>
-                                                        </div>
-                                                        <div class="plan-select"><a href="#" class="btn elite-submit-btn">Activate</a><span class="btn current"><i class="ion-checkmark"> </i>Current Plan</span></div>
-                                                    </div>
-                                                </div>
-                                                <ul class="plan-features">
-                                                    <li><i class="ion-checkmark"> </i>Unlimited Active Webhooks</li>
-                                                    <li><i class="ion-checkmark"> </i>20000 tasks per month</li>
-                                                    <li><i class="ion-checkmark"> </i>30 Days Log Retention</li>
-                                                </ul>
-                                                <input id="elite-submit-btn" style="display: none;" type="submit" name="plan_type" value="elite"/>
-                                            </div>
+{{--                                        <div class="col-md-4 col-sm-6 col-12 mt-mobile">--}}
+{{--                                            <div class="plan elite <?= $classes['elite'] ?>">--}}
+{{--                                                <div class="ribbon ribbon-top-right"><span>Featured</span></div>--}}
+{{--                                                    <div class="box">--}}
+{{--                                                        <header>--}}
+{{--                                                            <h4 class="plan-title">Elite</h4>--}}
+{{--                                                            <div class="plan-cost">--}}
+{{--                                                                <span class="sup">$</span>--}}
+{{--                                                                <span class="plan-price">{{ env('Elite_Plan_PRICE', 9) }}</span>--}}
+{{--                                                                <span class="plan-type">/month</span>--}}
+{{--                                                                <div class="muted">USD Billed Monthly </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </header>--}}
+{{--                                                        <div class="text">--}}
+{{--                                                            <p>Suitable for Shopify Advanced and Plus Store users.</p>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="plan-select"><a href="#" class="btn elite-submit-btn">Activate</a><span class="btn current"><i class="ion-checkmark"> </i>Current Plan</span></div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <ul class="plan-features">--}}
+{{--                                                    <li><i class="ion-checkmark"> </i>Unlimited tokens for text</li>--}}
+{{--                                                    <li><i class="ion-checkmark"> </i>500 AI images for products</li>--}}
+{{--                                                    <li><i class="ion-checkmark"> </i>Unlock AI generated Blogs</li>--}}
+{{--                                                </ul>--}}
+{{--                                                <input id="elite-submit-btn" style="display: none;" type="submit" name="plan_type" value="elite"/>--}}
+{{--                                            </div>--}}
                                         </div>
 
                                 </form>
