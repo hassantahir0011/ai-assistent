@@ -9,52 +9,47 @@
         <div class="Polaris-Page__MainContent ">
 
 
-                <div class="Polaris-Page__Content">
-                    <div class="Polaris-Layout">
-                        <div class="Polaris-Layout__Section">
-                            <ul class="Polaris-Tabs">
-                                <li class="Polaris-Tabs__TabContainer">
-                                    <button type="button" class="Polaris-Tabs__Tab {{ session('active_tab')==null || session('active_tab')=='size_chart'?'Polaris-Tabs__Tab--selected':'' }}"
-                                            data-id="create-sizeChart-tab"><span
-                                                class="Polaris-Tabs__Title">
-                                            <span id="country-sizes-demo">Webhooks</span></span></button>
-                                </li>
+            <div class="Polaris-Page__Content">
+                <div class="Polaris-Layout">
+                    <div class="Polaris-Layout__Section">
+                        <ul class="Polaris-Tabs">
+                            <li class="Polaris-Tabs__TabContainer">
+                                <button type="button" class="Polaris-Tabs__Tab {{ session('active_tab')==null || session('active_tab')=='size_chart'?'Polaris-Tabs__Tab--selected':'' }}"
+                                    data-id="create-sizeChart-tab">
+                                    <span class="Polaris-Tabs__Title">
+                                        <span id="country-sizes-demo">Webhooks</span>
+                                    </span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
 
-                            </ul>
-                        </div>
+                    <div class="Polaris-Layout__Section">
+                        {{--<form id="StyleDesignForm">--}}
+                        <div class="Polaris-Tabs__TabContent Polaris-Card">
+                            <div id="create-sizeChart-tab" class="Polaris-Card__Section Polaris-Tabs__TabContainer">
+                                <br>
+                                <form id="sizechartForm" method="post" action="{{ route('add_js_snippets') }}"
+                                      enctype="multipart/form-data">
+                                    <div style="margin-top: 35px;">
 
-                        <div class="Polaris-Layout__Section">
-                            {{--<form id="StyleDesignForm">--}}
-                            <div class="Polaris-Tabs__TabContent Polaris-Card">
-                                <div id="create-sizeChart-tab" class="Polaris-Card__Section Polaris-Tabs__TabContainer">
-
-<br>
-                                        <form id="sizechartForm" method="post" action="{{ route('add_js_snippets') }}"
-                                              enctype="multipart/form-data">
-                                            <div style="margin-top: 35px;">
-
-                                            @include('store_webhooks')
-                                            </div>
-                                    </form>
-
-                                </div>
-
-
-
-
+                                        @include('store_webhooks')
+                                    </div>
+                                </form>
                             </div>
-                            <div class="clear"></div>
-
-
-
-
-
-
-
-
                         </div>
+                        <div class="clear"></div>
+
+
+
+
+
+
+
+
                     </div>
                 </div>
+            </div>
 
         </div>
 

@@ -23809,14 +23809,18 @@ input[type=submit] {
   max-height: 100px;
 }
 
+.slideBoxSelect,
 .slideBox {
   max-height: 0;
   overflow: hidden;
   transition: all ease 0.3s;
 }
+.slideBoxSelect.active,
 .slideBox.active {
   max-height: 400px;
+  overflow: visible;
 }
+.slideBoxSelect textarea.form-control,
 .slideBox textarea.form-control {
   line-height: 18px;
   padding: 12px;
@@ -23979,6 +23983,17 @@ button.readmore:hover,
 input[type=submit].readmore:hover,
 .btn.readmore:hover {
   background: #ce0355;
+}
+button[data-toggle=popover],
+input[type=submit][data-toggle=popover],
+.btn[data-toggle=popover] {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  color: #66bf97;
+  background: none;
+  font-size: 15px;
+  line-height: 15px;
 }
 
 .container {
@@ -24648,6 +24663,26 @@ table .icon-list .icon-box img {
   padding: 0 5px;
   border-radius: 5px;
   line-height: 16px;
+}
+
+.fade:not(.show) {
+  opacity: 1;
+}
+
+.popover {
+  border-color: #66bf97;
+}
+.popover .popover-content {
+  font-size: 12px !important;
+  min-width: 200px;
+}
+.popover.right > .arrow {
+  border-right-color: #66bf97;
+}
+.popover .popover-title {
+  background: rgba(0, 128, 96, 0.07);
+  color: #66bf97;
+  border: none;
 }
 
 /*# sourceMappingURL=main.css.map */

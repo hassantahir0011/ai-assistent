@@ -111,6 +111,7 @@
   }
 }
 
+.slideBoxSelect,
 .slideBox{
   max-height: 0;
   overflow: hidden;
@@ -119,6 +120,7 @@
 
   &.active{
     max-height: 400px;
+    overflow: visible;
   }
 
   textarea.form-control{
