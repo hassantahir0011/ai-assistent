@@ -12,6 +12,21 @@ function initMobileNav() {
     });;
 }
 
+
+
+$(function () {
+    $('[data-toggle="popover"]').popover()
+    $(document).on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            // If the clicked target is not the popover or its descendant
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+})
+
+
 /*
  * Simple Mobile Navigation
  */

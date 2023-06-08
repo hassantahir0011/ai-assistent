@@ -55,36 +55,38 @@ $asset_controls = [
 @endsection
 
 @section('content')
-    <section class="section">
-        <div class="container">
-            <div class="section-main-heading"
-                 style="--top-bar-background:#00848e; --top-bar-color:#f9fafb; --top-bar-background-lighter:#1d9ba4;">
-                <h4>Shopify Products</h4>
-            </div>
+    <main id="main">
+        <section class="section">
+            <div class="container">
+                <div class="mainbox">
+                    <div class="section-main-heading"
+                         style="--top-bar-background:#00848e; --top-bar-color:#f9fafb; --top-bar-background-lighter:#1d9ba4;">
+                        <h4>Shopify Products</h4>
+                    </div>
 
-            <div class="">
-                <div class="">
-                    <div class="logs-page table-scroll">
-                        <table class="registered-webhook-table responsive table table-hover table-checkable order-column dataTable no-footer dtr-inline"
-                               id="sample_1">
-                            <thead>
-                            <tr class="">
-                                <th> ID</th>
-                                <th> Image</th>
-                                <th> Title</th>
-                                <th> Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                    <div class="productListing">
+                        <div class="logs-page table-scroll">
+                            <table class="registered-webhook-table responsive table table-hover table-checkable order-column dataTable no-footer dtr-inline"
+                                   id="sample_1">
+                                <thead>
+                                <tr class="">
+                                    <th> ID</th>
+                                    <th> Image</th>
+                                    <th> Title</th>
+                                    <th> Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <span id="nextPageInfo" style="display:none"></span>
-    <span id="previousPageInfo" style="display:none"></span>
+        </section>
+        <span id="nextPageInfo" style="display:none"></span>
+        <span id="previousPageInfo" style="display:none"></span>
+    </main>
 @endsection
 
 @section('last_scripts')
@@ -276,7 +278,7 @@ $asset_controls = [
                         "data": "image_url",
                         "orderable": false,
                         'render': function (data, type, row) {
-                            return '<div class="channel_icon"> <img alt="' + row.title + '"  src="' + row.image_url + '"  class=""/></div>';
+                            return '<a href="{{ route('product') }}?id='+ row.id +'" class="channel_icon"> <img alt="' + row.title + '"  src="' + row.image_url + '"  class=""/></a>';
                         }
                     },
                     {
@@ -290,7 +292,7 @@ $asset_controls = [
                         'render': function (data, type, row) {
                             // return row.status == false ? '<button class="btn btn-primary" onclick="retry_failed_webhook('+row.id+')">Retry</button>' : ''
                             // return row.status == false ? '<button class="btn btn-primary retry-failed-job-button" data-retry-action='+row.retry_action+' >Retry</button>' : ''
-                            return '<a style="background: #66bf97 !important;" class="btn btn-success" href="{{ route('product') }}?id='+ row.id +'" >Open Details</a>'
+                            return '<a class="btn btn-edit" href="{{ route('product') }}?id='+ row.id +'" ><i class="fal fa-eye"></i></a>'
                         }
                     }
                 ],

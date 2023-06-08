@@ -4,6 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 <title>{{ config('app.name') }}</title>
 <link rel="icon" href="{{ asset('cdn/icon-16x16.jpg') }}" type="image/jpg" sizes="16x16">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://sdks.shopifycdn.com/polaris/3.5.0/polaris.min.css" rel="stylesheet" type="text/css" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/assets/webhook_app/css/polaris-webhook.css?v=5') }}" rel="stylesheet" type="text/css"/>
