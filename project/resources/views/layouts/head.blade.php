@@ -4,16 +4,19 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 <title>{{ config('app.name') }}</title>
 <link rel="icon" href="{{ asset('cdn/icon-16x16.jpg') }}" type="image/jpg" sizes="16x16">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://sdks.shopifycdn.com/polaris/3.5.0/polaris.min.css" rel="stylesheet" type="text/css" />
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+{{--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />--}}
 <link href="{{ asset('/assets/webhook_app/css/polaris-webhook.css?v=5') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ URL::asset('assets/global/plugins/font-awesome/css/font-awesome.min.css', null, true) }}" rel="stylesheet" type="text/css" />
+{{--<link href="{{ URL::asset('assets/global/plugins/font-awesome/css/font-awesome.min.css', null, true) }}" rel="stylesheet" type="text/css" />--}}
 <link href="{{ URL::asset('assets/global/plugins/toastr.min.css', null, true) }}" rel="stylesheet" type="text/css" />
 <link href="{{ env('APP_URL') }}/css/event_documentation_tab.css" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('css/appdesign/css/main.css', null, true) }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('assets/global/plugins/select2/css/select2.min.css', null, true) }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('assets/global/plugins/select2/css/select2-bootstrap.min.css', null, true) }}" rel="stylesheet" type="text/css" />
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
 <style>
     .swal-content{
         color: #0a0a0a;
