@@ -80,8 +80,50 @@ class WebhookReceiverController extends Controller
     }
     function testing(){
         try{
-            $shop = Shop::where('shop_id', 57502138441)->first();
-            dd($shop->purchased_text_processed_jobs->sum('tokens'), ((($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token')) ?? 0) % 1000));
+//            $shop = Shop::where('shop_id', 57502138441)->first();
+//            dd($shop->purchased_text_processed_jobs->sum('tokens'), ((($shop->purchased_text_processed_jobs->sum('tokens') + config('shopify.trial_text_token')) ?? 0) % 1000));
+            $startDate = now()->startOfMonth();
+            $endDate = now()->endOfMonth();
+
+            $daysOfMonth = [];
+            $textTokenUsage = [];
+            $imageTokenUsage = [];
+            $currentDate = clone $startDate;
+
+            while ($currentDate <= $endDate) {
+                $day = $currentDate->format('j');
+                $daysOfMonth[] = $day;
+                $textTokenUsage[$day] = 0;
+                $imageTokenUsage[$day] = 0;
+                $currentDate->modify('+1 day');
+            }
+
+            $data = \DB::table('processed_jobs')
+                ->select(
+                    \DB::raw('EXTRACT(DAY FROM created_at) as day'),
+                    \DB::raw('SUM(CASE WHEN media_type = \'text\' THEN tokens ELSE 0 END) as text_tokens'),
+                    \DB::raw('SUM(CASE WHEN media_type = \'image\' THEN tokens ELSE 0 END) as image_tokens')
+                )
+                ->where('created_at', '>=', $startDate)
+                ->where('created_at', '<=', $endDate)
+                ->where('transaction_type', '=', 'credit')
+                ->groupBy('day')
+                ->orderBy('day')
+                ->get();
+
+            foreach ($data as $item) {
+                $day = $item->day;
+                $textTokens = $item->text_tokens;
+                $imageTokens = $item->image_tokens;
+                $textTokenUsage[$day] = $textTokens;
+                $imageTokenUsage[$day] = $imageTokens;
+            }
+
+            $textTokenUsage = array_values($textTokenUsage);
+            $imageTokenUsage = array_values($imageTokenUsage);
+
+
+            dd($daysOfMonth, $textTokenUsage, $imageTokenUsage);
         }
         catch (\Exception $e){
             \Log::info($e->getMessage());
