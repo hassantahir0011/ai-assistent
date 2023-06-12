@@ -140,7 +140,52 @@ class WebhookManagementController extends Controller
             ->get();
         $processed_webhooks = $shop->processed_jobs()->count();
         $allowed_webhooks_tasks = allowed_webhooks_tasks($shop->current_plan_type);
-        $favorites = FavoriteConnectorWithWebhookEvent::all()->shuffle()->take(5);
+
+        $startDate = now()->startOfMonth();
+        $endDate = now()->endOfMonth();
+
+        $daysOfMonth = [];
+        $tokenUsage = [];
+        $currentDate = clone $startDate;
+
+        while ($currentDate <= $endDate) {
+            $day = $currentDate->format('j');
+            $daysOfMonth[] = $day;
+            $tokenUsage[$day] = 0;
+            $currentDate->modify('+1 day');
+        }
+
+        $data = \DB::table('processed_jobs')
+            ->select(
+                \DB::raw('EXTRACT(DAY FROM created_at) as day'),
+                \DB::raw('SUM(tokens) as total_tokens')
+            )
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->where('media_type', '=', 'text')
+            ->where('shop_id', '=', $shop->shop_id)
+            ->where('transaction_type', '=', 'credit')
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get();
+
+        foreach ($data as $item) {
+            $day = $item->day;
+            $totalTokens = $item->total_tokens;
+            $tokenUsage[$day] = $totalTokens;
+        }
+
+        $dataset = [];
+
+        foreach ($daysOfMonth as $day) {
+            $dataset[] = [
+                'day' => (string)$day,
+                'value' => $tokenUsage[$day]
+            ];
+        }
+
+        $dataset = json_encode($dataset);
+
 
         $register_webhook_query = ChannelConfig::where('shop_id', $shop->shop_id)
             ->join('webhook_topics', 'channel_configs.webhook_topic_id', '=', 'webhook_topics.id', 'inner')
@@ -157,7 +202,7 @@ class WebhookManagementController extends Controller
             $months_diff = Carbon::parse($shop->created_at)->diffInMonths(Carbon::now()) + 1;
             $plan_history_next_date = Carbon::parse($shop->created_at)->addMonthsNoOverflow($months_diff)->toFormattedDateString();
         }
-        return view('webhook_management', compact('webhook_events', 'processed_webhooks', 'allowed_webhooks_tasks', 'shop', 'plan_history', 'plan_history_next_date', 'favorites', 'register_webhooks'));
+        return view('webhook_management', compact('webhook_events', 'processed_webhooks', 'allowed_webhooks_tasks', 'shop', 'plan_history', 'plan_history_next_date', 'dataset', 'register_webhooks'));
 
     }
 
@@ -422,7 +467,7 @@ class WebhookManagementController extends Controller
             if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= "Description: '$request->prompt' \n";
             $content .= "Generate a product description of $request->wordCount words for the '$request->title'";
             if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " based on the following prompt: '$request->prompt'.";
-            $content .= " The description should be in $request->formatOption format (compatible with Quill library on frontend input) and should focus on highlighting the unique features and benefits of the product. Avoid using pronouns or common phrases to create a more engaging and concise description.";
+            $content .= " The description should be in $request->formatOption format (compatible with Quill library on frontend input without <div> tags) and should focus on highlighting the unique features and benefits of the product. Avoid using pronouns or common phrases to create a more engaging and concise description.";
 
 //            $content = "write a product description for my shopify store and it should be in e-commerce style and avoid word like introducing and pronouns like i, we, our etc in the description. Product Title: '$request->title'.";
 //            if($request->generateOption == 'titleAndPrompt' && $request->prompt) $content .= " Prompt from user or key features are '$request->prompt'.";

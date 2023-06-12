@@ -86,26 +86,24 @@ class WebhookReceiverController extends Controller
             $endDate = now()->endOfMonth();
 
             $daysOfMonth = [];
-            $textTokenUsage = [];
-            $imageTokenUsage = [];
+            $tokenUsage = [];
             $currentDate = clone $startDate;
 
             while ($currentDate <= $endDate) {
                 $day = $currentDate->format('j');
                 $daysOfMonth[] = $day;
-                $textTokenUsage[$day] = 0;
-                $imageTokenUsage[$day] = 0;
+                $tokenUsage[$day] = 0;
                 $currentDate->modify('+1 day');
             }
 
             $data = \DB::table('processed_jobs')
                 ->select(
                     \DB::raw('EXTRACT(DAY FROM created_at) as day'),
-                    \DB::raw('SUM(CASE WHEN media_type = \'text\' THEN tokens ELSE 0 END) as text_tokens'),
-                    \DB::raw('SUM(CASE WHEN media_type = \'image\' THEN tokens ELSE 0 END) as image_tokens')
+                    \DB::raw('SUM(tokens) as total_tokens')
                 )
                 ->where('created_at', '>=', $startDate)
                 ->where('created_at', '<=', $endDate)
+                ->where('media_type', '=', 'text')
                 ->where('transaction_type', '=', 'credit')
                 ->groupBy('day')
                 ->orderBy('day')
@@ -113,17 +111,21 @@ class WebhookReceiverController extends Controller
 
             foreach ($data as $item) {
                 $day = $item->day;
-                $textTokens = $item->text_tokens;
-                $imageTokens = $item->image_tokens;
-                $textTokenUsage[$day] = $textTokens;
-                $imageTokenUsage[$day] = $imageTokens;
+                $totalTokens = $item->total_tokens;
+                $tokenUsage[$day] = $totalTokens;
             }
 
-            $textTokenUsage = array_values($textTokenUsage);
-            $imageTokenUsage = array_values($imageTokenUsage);
+            $dataset = [];
+
+            foreach ($daysOfMonth as $day) {
+                $dataset[] = [
+                    'day' => (string)$day,
+                    'value' => $tokenUsage[$day]
+                ];
+            }
 
 
-            dd($daysOfMonth, $textTokenUsage, $imageTokenUsage);
+            dd(json_encode($dataset));
         }
         catch (\Exception $e){
             \Log::info($e->getMessage());

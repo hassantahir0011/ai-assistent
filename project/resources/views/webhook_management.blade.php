@@ -74,41 +74,6 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(count($favorites))
-                                <div class="mainbox">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h5>Quickly Connect</h5>
-
-                                            <div id="favorites">
-                                                @foreach($favorites as $favorite)
-                                                    <div class="card horizontally">
-                                                        <div class="card-body">
-                                                            <ul class="icon-list small">
-                                                                <li>
-                                                                    <div class="icon-box">
-                                                                        <img src="https://appscorridor.com/webhook_setup_stage/css/appdesign/images/shopify-img.png">
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="icon-box">
-                                                                        <img src="{{ config('channel.icon_path') }}">
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                            <p>{{ $favorite->message }} <a href="#">{{ ucwords(str_replace('_', ' ', config('channel.name'))) }}</a> </p>
-                                                            <a href="{{ route('channel_config', [$favorite->webhook_event->slug]) }}" class="btn ">Try it</a>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            <div class="overflow-hidden">
-                                                <a class="btn d-block" href="{{ route('automate') }}">View All</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                         <div class="col-lg-4">
                             <div class="mainbox mb-4">
@@ -286,44 +251,11 @@
             var chart = am4core.create("chartdiv", am4charts.XYChart);
 
             // Add data
-            chart.data = [{
-                "year": "2010",
-                "value": 450
-            }, {
-                "year": "2011",
-                "value": 560
-            }, {
-                "year": "2012",
-                "value": 650
-            }, {
-                "year": "2013",
-                "value": 800
-            }, {
-                "year": "2014",
-                "value": 890
-            }, {
-                "year": "2015",
-                "value": 950
-            }, {
-                "year": "2016",
-                "value": 1100
-            }, {
-                "year": "2017",
-                "value": 1200
-            }, {
-                "year": "2018",
-                "value": 1400
-            }, {
-                "year": "2019",
-                "value": 1550
-            }, {
-                "year": "2020",
-                "value": 1700
-            }];
+            chart.data = {!! $dataset !!};
 
             // Create axes
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-            categoryAxis.dataFields.category = "year";
+            categoryAxis.dataFields.category = "day";
             categoryAxis.renderer.grid.template.location = 0;
             categoryAxis.renderer.minGridDistance = 30;
 
@@ -332,7 +264,7 @@
             // Create series
             var series = chart.series.push(new am4charts.LineSeries());
             series.dataFields.valueY = "value";
-            series.dataFields.categoryX = "year";
+            series.dataFields.categoryX = "day";
             series.strokeWidth = 2;
             series.minBulletDistance = 10;
             series.tooltipText = "{valueY}";
