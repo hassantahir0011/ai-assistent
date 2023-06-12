@@ -251,7 +251,7 @@ $asset_controls = [
                 "paging": true,
                 'bSortable': true,
                 "bInfo": true,
-                iDisplayLength: 10,
+                iDisplayLength: 100,
                 "lengthChange": true,
 //                    dom: 'fBlrtip',
                 "autoWidth": false,
