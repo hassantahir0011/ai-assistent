@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="mainbox">
-                                <canvas id="myChart"></canvas>
+                                <div id="chartdiv"></div>
                             </div>
                             @if(count($register_webhooks))
                                 <div class="mainbox mb-4">
@@ -275,50 +275,72 @@
         })
     </script>
 
+
     <script>
-        // Data for the chart
-        const data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: 'My Dataset',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        // Create chart instance
+        am4core.ready(function() {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
 
-        // Configuration options
-        const options = {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
+            var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-        // Create the bar chart
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
+            // Add data
+            chart.data = [{
+                "year": "2010",
+                "value": 450
+            }, {
+                "year": "2011",
+                "value": 560
+            }, {
+                "year": "2012",
+                "value": 650
+            }, {
+                "year": "2013",
+                "value": 800
+            }, {
+                "year": "2014",
+                "value": 890
+            }, {
+                "year": "2015",
+                "value": 950
+            }, {
+                "year": "2016",
+                "value": 1100
+            }, {
+                "year": "2017",
+                "value": 1200
+            }, {
+                "year": "2018",
+                "value": 1400
+            }, {
+                "year": "2019",
+                "value": 1550
+            }, {
+                "year": "2020",
+                "value": 1700
+            }];
+
+            // Create axes
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "year";
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.minGridDistance = 30;
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+            // Create series
+            var series = chart.series.push(new am4charts.LineSeries());
+            series.dataFields.valueY = "value";
+            series.dataFields.categoryX = "year";
+            series.strokeWidth = 2;
+            series.minBulletDistance = 10;
+            series.tooltipText = "{valueY}";
+
+            // Add cursor
+            chart.cursor = new am4charts.XYCursor();
+
+        }); // end am4core.ready()
     </script>
 
 @endsection

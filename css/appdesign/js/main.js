@@ -12,19 +12,23 @@ function initMobileNav() {
     });;
 }
 
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+});
 
+// document.addEventListener('click', function (event) {
+//     var popoverTrigger = document.querySelector('[data-bs-toggle="popover"]');
+//     var popover = bootstrap.Popover.getInstance(popoverTrigger);
+//
+//     if (popover) {
+//         var clickedInsidePopover = popoverTrigger.contains(event.target);
+//         if (!clickedInsidePopover) {
+//             popover.hide();
+//         }
+//     }
+// });
 
-$(function () {
-    $('[data-toggle="popover"]').popover()
-    $(document).on('click', function (e) {
-        $('[data-toggle="popover"]').each(function () {
-            // If the clicked target is not the popover or its descendant
-            if (!$(this).is(e.target) && $(this).has(e.target).length === 0) {
-                $(this).popover('hide');
-            }
-        });
-    });
-})
 
 
 /*

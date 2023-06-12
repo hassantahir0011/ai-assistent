@@ -106,7 +106,7 @@ $asset_controls = [
                                         <div class="col-md-4 form-group">
                                             <label for="generateOptions" class="form-label">
                                                 Generate Description:
-                                                <button type="button" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
+                                                <button type="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
                                             </label>
                                             <select id="generateOptions" class="form-select" aria-label="Generate Description">
                                                 <option selected value="titleOnly">Title Only</option>
@@ -115,7 +115,7 @@ $asset_controls = [
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="wordCount" class="form-label">Number of Words:
-                                                <button type="button" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
+                                                <button type="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
                                             </label>
                                             <select id="wordCount" class="form-select" aria-label="Number of Words">
                                                 <option selected value="100">100 words</option>
@@ -125,7 +125,7 @@ $asset_controls = [
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="formatOptions" class="form-label">Format:
-                                                <button type="button" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
+                                                <button type="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
                                             </label>
                                             <select id="formatOptions" class="form-select" aria-label="Format">
                                                 <option selected value="html">Formatted</option>
@@ -134,8 +134,8 @@ $asset_controls = [
                                         </div>
                                     </div>
                                     <div class="input-field form-group">
-                                        <label for="prompt">Enter Custom Prompt
-                                            <button type="button" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
+                                        <label for="prompt" class="form-label">Enter Custom Prompt
+                                            <button type="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fas fa-question-circle"></i></button>
                                         </label>
                                         <textarea id="prompt" class="form-control" placeholder="Define your product and its key features..." type="text"> </textarea>
                                     </div>
