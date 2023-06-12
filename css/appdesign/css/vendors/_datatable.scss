@@ -56,11 +56,22 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
 .dataTables_paginate{
     padding: 10px 0;
 
+    ul{
+        li{
+            display: none !important;
+
+            &.prev,
+            &.next{
+                display: block !important;
+            }
+        }
+    }
+
     a{
         font-size: 13px;
         color: #fff;
         padding: 8px;
-        background: #4328b5;
+        background: rgba(0, 128, 96, 0.07);
         cursor: pointer;
         min-width: 36px;
         border-left: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,7 +80,8 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
         text-align: center;
 
         &:hover{
-            background: rgba(67, 40, 181, 0.75);
+            background: rgba(0, 128, 96, 1);
+            color: #fff;
         }
 
         &.previous,

@@ -149,10 +149,10 @@ $.extend($.fn.dataTableExt.oPagination, {
 
             $(nPaging).append(
                 '<ul class="pagination">' +
-                '<li class="prev disabled"><a href="#" title="' + oLang.sFirst + '"><i class="fa fa-angle-double-left"></i></a></li>' +
-                '<li class="prev disabled"><a href="#" title="' + oLang.sPrevious + '">&lt;&lt;</a></li>' +
-                '<li class="next disabled"><a href="#" title="' + oLang.sNext + '">&gt;&gt;</a></li>' +
-                '<li class="next disabled"><a href="#" title="' + oLang.sLast + '"><i class="fa fa-angle-double-right"></i></a></li>' +
+                '<li class="prev disabled"><a href="#" title="' + oLang.sFirst + '"><i class="far fa-angle-double-left"></i></a></li>' +
+                '<li class="prev disabled"><a href="#" title="' + oLang.sPrevious + '"><i class="far fa-angle-double-left"></i> </a></li>' +
+                '<li class="next disabled"><a href="#" title="' + oLang.sNext + '"><i class="far fa-angle-double-right"></i> </a></li>' +
+                '<li class="next disabled"><a href="#" title="' + oLang.sLast + '"><i class="far fa-angle-double-right"></i></a></li>' +
                 '</ul>'
             );
             var els = $('a', nPaging);
@@ -244,8 +244,8 @@ $.extend($.fn.dataTableExt.oPagination, {
 
             $(nPaging).append(
                 '<ul class="pagination">' +
-                '<li class="prev disabled"><a href="#" title="' + oLang.sPrevious + '">&lt;&lt;</a></li>' +
-                '<li class="next disabled"><a href="#" title="' + oLang.sNext + '">&gt;&gt;</a></li>' +
+                '<li class="prev disabled"><a href="#" title="' + oLang.sPrevious + '"><i class="far fa-angle-double-left"></i> </a></li>' +
+                '<li class="next disabled"><a href="#" title="' + oLang.sNext + '"><i class="far fa-angle-double-right"></i> </a></li>' +
                 '</ul>'
             );
             var els = $('a', nPaging);
@@ -333,9 +333,9 @@ $.extend($.fn.dataTableExt.oPagination, {
 
             $(nPaging).append(
                 '<div class="pagination-panel"> ' + (oLang.page ? oLang.page : '') + ' ' +
-                '<a href="#" class="btn btn-sm default prev disabled">&lt;&lt;</a>' +
+                '<a href="#" class="btn btn-sm default prev disabled"><i class="far fa-angle-double-left"></i> </a>' +
                 '<input type="text" class="pagination-panel-input form-control input-sm input-inline input-mini" maxlenght="5" style="text-align:center; margin: 0 5px;">' +
-                '<a href="#" class="btn btn-sm default next disabled">&gt;&gt;</a> ' +
+                '<a href="#" class="btn btn-sm default next disabled"><i class="far fa-angle-double-right"></i> </a> ' +
                 (oLang.pageOf ? oLang.pageOf + ' <span class="pagination-panel-total"></span>': '') + 
                 '</div>'
             );
