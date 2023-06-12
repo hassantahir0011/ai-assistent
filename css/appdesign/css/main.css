@@ -23065,11 +23065,17 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
 .dataTables_paginate {
   padding: 10px 0;
 }
+.dataTables_paginate ul li {
+  display: none !important;
+}
+.dataTables_paginate ul li.prev, .dataTables_paginate ul li.next {
+  display: block !important;
+}
 .dataTables_paginate a {
   font-size: 13px;
   color: #fff;
   padding: 8px;
-  background: #4328b5;
+  background: rgba(0, 128, 96, 0.07);
   cursor: pointer;
   min-width: 36px;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
@@ -23078,7 +23084,8 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   text-align: center;
 }
 .dataTables_paginate a:hover {
-  background: rgba(67, 40, 181, 0.75);
+  background: #008060;
+  color: #fff;
 }
 .dataTables_paginate a.previous, .dataTables_paginate a.next {
   padding: 8px 15px;
@@ -23178,6 +23185,10 @@ td .switch input:checked + .slider::before {
 
 .font-12 {
   font-size: 12px;
+}
+
+.text-right {
+  text-align: right;
 }
 
 html {
